@@ -21,7 +21,7 @@ reason_list = [
 
 def main():
     if len(sys.argv) != 3:
-        exit();
+        exit()
 
     clean_db()
     create_sim_data()
@@ -80,7 +80,7 @@ def create_machines():
 
 def create_reports(machine_id):
     before = int(sys.argv[1])
-    after = int(sys.argv[2]);
+    after = int(sys.argv[2])
     start_date = date.today() - timedelta(days=before)
     delta = timedelta(days=(before + after))
 
@@ -136,7 +136,7 @@ def gen_stop_machine_data(report_id, date):
     total_stop_time = [0, 0, 0]
 
     for turn in range(3):
-        is_stop = False;
+        is_stop = False
         start_time = turn_start[turn].replace(year=date.year, month=date.month, day=date.day)
         period_counter = 0
 
