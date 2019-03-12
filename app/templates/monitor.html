@@ -1,0 +1,403 @@
+<div class="row">
+    <div class="col-lg-12">
+          <h1 class="page-header">Monitoramento - {{ machine.name }}</h1>
+    </div>
+</div>
+
+    <!-- Coluna 1 -->
+<div class="col-lg-9 col-md-9 col-sm-9">
+
+    <!-- LINHA 1 -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="center-div panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" href="#collapse-spindle">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Spindle Gauges
+                    </a>
+                </div>
+                <!-- /.panel-heading -->
+
+                <!-- SPINDLE DATA -->
+                <div id="collapse-spindle" class="panel-collapse collapse in">
+                    <div class="panel-body">
+
+                        <!-- GAUGES -->
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class=" center-div gauge" id="gauge-power"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="center-div gauge" id="gauge-rpm"></div>
+                            </div>
+                        </div>
+
+                     </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" href="#collapse-status">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Status
+                    </a>
+                </div>
+                <!-- /.panel-heading -->
+                <div id="collapse-status" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <!-- Leds -->
+                        <div class="row">
+                            <div class="led-green" id="green-led"></div>
+                            <div class="led-yellow" id="yellow-led"></div>
+                            <div class="led-red" id="red-led"></div>
+                        </div>
+
+                        <!-- Alarm number -->
+                        <div class="row" id="alarm-number-row">
+                            <div class="col-lg-offset-0 col-lg-12 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+                                <div class="panel panel-yellow">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-12 text-center">
+                                                <div>Alarm Number</div>
+                                                <div class="font-highlight" id="alarm-number"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- High Prio Alarm -->
+                        <div class="row" id="alarm-high-row">
+                            <div class="col-lg-offset-0 col-lg-12 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+                                <div class="panel panel-yellow">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-12 text-center">
+                                                <div>Last Alarm</div>
+                                                <div class="font-highlight" id="alarm-high"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- /.panel-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="row">
+
+        <!-- COLUMN 1 -->
+        <div class="col-lg-12">
+
+            <!-- PANEL - Spindle Axis -->
+            <div class="center-div panel panel-default">
+
+                <!-- PANEL HEADING -->
+                <div class="panel-heading">
+                    <a data-toggle="collapse" href="#collapse-axis">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Spindle Axis Position
+                    </a>
+                </div>
+                <!-- END PANEL HEADING -->
+
+                <!-- PANEL BODY -->
+                <div id="collapse-axis" class="panel-collapse collapse in">
+                    <div class="panel-body">
+
+                        <!-- COLUMN 1 - X AXIS -->
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <div>X Axis</div>
+                                            <div class="font-highlight" id="xaxis"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END COLUMN 1 - X AXIS -->
+
+                        <!-- COLUMN 2 - Y AXIS -->
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <div>Y Axis</div>
+                                            <div class="font-highlight" id="yaxis"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END COLUMN 2 - Y AXIS -->
+
+                        <!-- COLUMN 3 - Z AXIS -->
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <div>Z Axis</div>
+                                            <div class="font-highlight" id="zaxis"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END COLUMN 3 - Z AXIS -->
+
+                    </div>
+                 </div>
+                <!-- END PANEL BODY -->
+
+            </div>
+            <!-- END PANEL - Spindle Axis -->
+
+        </div>
+        <!-- END COLUMN 1 -->
+    </div>
+    <!-- END ROW 2 -->
+
+    <!-- ROW 3 -->
+    <div class="row">
+        <!-- COLUMN 1 -->
+        <div class="col-lg-12">
+
+            <!-- PANEL - Spindle Feed Rate -->
+            <div class="center-div panel panel-default">
+
+                <!-- PANEL HEADING -->
+                <div class="panel-heading">
+                    <a data-toggle="collapse" href="#collapse-feed">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Spindle Axis Velocity
+                    </a>
+                </div>
+                <!-- END PANEL HEADING -->
+
+                <!-- PANEL BODY -->
+                <div id="collapse-feed" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="chart-avail" id="feed-chart"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- COLUMN 1 - X AXIS VEL -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Absolute Velocity X</div>
+                                                    <div class="font-highlight" id="xaxis-vel"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END COLUMN 1 - X AXIS VEL -->
+
+                                <!-- COLUMN 2 - Y AXIS VEL -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Absolute Velocity Y</div>
+                                                    <div class="font-highlight" id="yaxis-vel"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END COLUMN 2 - Y AXIS VEL -->
+
+                                <!-- COLUMN 3 - Z AXIS VEL-->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Absolute Velocity Z</div>
+                                                    <div class="font-highlight" id="zaxis-vel"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END COLUMN 3 - Z AXIS VEL-->
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <!-- END PANEL BODY -->
+
+            </div>
+            <!-- END PANEL - Spindle Feed Rate -->
+
+        </div>
+        <!-- END COLUMN 1 -->
+
+    </div>
+    <!-- END ROW 3 -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" href="#collapse-perf">
+                        <i class="fa fa-bar-chart-o fa-fw" onclick="drawChartAvailability()"></i> Performance
+                    </a>
+                </div>
+                <!-- /.panel-heading -->
+                <div id="collapse-perf" class="panel-collapse collapse in">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="chart-avail" id="avail-chart"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4 col-xs-offset-0 col-xs-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-12 text-center">
+                                                <div>Parts / Hour</div>
+                                                <div class="font-highlight" id="parts-hour"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END COLLUMN 1 -->
+
+<!-- COLLUMN 2 -->
+<div class="col-lg-3 col-md-3 col-sm-3">
+
+    <!-- ROW 1 - Cutting time -->
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <div>Cutting Time</div>
+                        <div class="font-highlight" id="cutting-time"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ROW 1 -->
+
+    <!-- ROW 2 - Machine time -->
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <div>Run Time</div>
+                        <div class="font-highlight" id="run-time"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ROW 2 -->
+
+    <!-- ROW 3 - Power On -->
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <div>Power On</div>
+                        <div class="font-highlight" id="poweron-time"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ROW 3 -->
+
+    <!-- ROW 4 - Operating -->
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <div>Operating Time</div>
+                        <div class="font-highlight" id="operating-time"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ROW 4 -->
+
+    <!-- ROW 5 - Parts Required -->
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <div>Parts Required</div>
+                        <div class="font-highlight" id="parts-required"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ROW 5 -->
+
+
+    <!-- ROW 6 - Parts Count -->
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <div>Parts Count</div>
+                        <div class="font-highlight" id="parts-count"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ROW 6 -->
+
+</div>
+<!-- END COLLUMN 2 -->
+
+
+
+
+
+

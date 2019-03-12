@@ -1,0 +1,105 @@
+{% extends "base_layout.html" %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container" id="dash-content">
+    <div class="row">
+        <div class="col-lg-offset-3 col-lg-6">
+              <h1 class="page-header" style="margin-left: 15px;">Supervisão Integrada</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-offset-3 col-lg-6">
+            <div class="tree">
+                <ul>
+                    <li> <span class="btn-success"><i class="fa fa-check"></i> EXPOMAFE</span>
+                        <ul>
+                            <li>
+                                <a href="maquina/1/" data-toggle="tooltip" title="SN: 016019052420" data-placement="right">
+                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> ROMI DCM 620 5X HYBRID</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="maquina/2/" data-toggle="tooltip" title="SN: 016019052499" data-placement="right">
+                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> ROMI GL 350B</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li> <span class="btn-danger"><i class="fa fa-warning"></i> Planta A</span>
+                        <ul>
+                            <li >
+                                <a href="#" data-toggle="tooltip" title="SN: 016019052777" data-placement="right">
+                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> ROMI DCM 3000 </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="tooltip" title="SN: 016019052666" data-placement="right">
+                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> ROMI DCM 560DP</span>
+                                </a>
+                            </li>
+                             <li>
+                                 <a href="#" data-toggle="tooltip" title="SN: 016019052555" data-placement="right">
+                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> ROMI ES 40</span>
+                                 </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="tooltip" title="SN: 016019052444" data-placement="right">
+                                    <span class="btn-xs btn-danger"><i class="fa fa-warning"></i> ROMI GL 170G</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li> <span class="btn-warning"><i class="fa fa-warning"></i> Planta B</span>
+                        <ul>
+                            <li>
+                                <a href="#" data-toggle="tooltip" title="SN: 016019052333" data-placement="right">
+                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> ROMI GL 280M </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="tooltip" title="SN: 016019052222" data-placement="right">
+                                    <span class="btn-xs btn-warning"><i class="fa fa-warning"></i> ROMI GL 350B </span>
+                                </a>
+                            </li>
+                             <li>
+                                 <a href="#" data-toggle="tooltip" title="SN: 016019052111" data-placement="right">
+                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> MaquROMI G 550M</span>
+                                 </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <script>
+                $(function () {
+                    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse');
+                    $('.tree li.parent_li > span').on('click', function (e) {
+                        var children = $(this).parent('li.parent_li').find(' > ul > li');
+                        if (children.is(":visible")) {
+                            children.hide('fast');
+                        } else {
+                            children.show('fast');
+                        }
+                        e.stopPropagation();
+                    });
+                });
+
+                $(window).bind("load resize", function () {
+                    var height = this.window.innerHeight - 116;
+                    if (height < 1) height = 1;
+                    if (height > 700) {
+                        $("#dash-content").css("min-height", (height) + "px");
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

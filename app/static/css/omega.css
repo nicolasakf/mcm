@@ -1,0 +1,370 @@
+.load-btn {
+    width: 200px;
+}
+
+.footer{
+    width:100%;
+    display:block;
+    overflow:auto;
+    background-color: #00579e;
+    color: white;
+    padding: 8px;
+    text-align: center;
+}
+
+.footer a{
+    color: white;
+}
+
+.navbar-static-top {
+    background-color: #00579e;
+}
+
+#page-title {
+    color: white;
+    font-weight: bold;
+    margin-top:12px;
+    padding:0px;
+    position: relative;
+    font-size: 28px;
+    width:100%
+}
+
+.img-center{
+    display: block;
+    margin: 0 auto;
+}
+
+#mach-img{
+    width: 65%;
+    height: 65%;
+    max-width: 600px;
+}
+
+.logo {
+    width: 75%;
+    min-width:150px;
+    max-width:280px;
+    margin-top: 10px;
+
+}
+
+.logo-min {
+    width: 60%;
+    padding: 10px;
+    min-width:120px;
+    max-width:260px;
+}
+
+.center-div {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.gauge {
+    width: 250px;
+    height: 100%;
+}
+
+.chart-avail {
+    width: 100%;
+    min-height: 250px;
+    padding-bottom: 10px;
+}
+
+.led-red {
+    margin: 20px auto;
+    width: 96px;
+    height: 32px;
+    /*background-color: #940;*/
+    background-color: #6d0000;
+    border-radius: 8px;
+    box-shadow: 0 -1px 5px 1px #444444, inset #444444 0 -1px 9px, #444444 0 2px 12px;
+}
+
+.led-yellow {
+    margin: 20px auto;
+    width: 96px;
+    height: 32px;
+    background-color: #6d6d00;
+    border-radius: 8px;
+    box-shadow: 0 -1px 5px 1px #444444, inset #444444 0 -1px 9px, #444444 0 2px 12px;
+}
+
+.led-green {
+    margin: 20px auto;
+    width: 96px;
+    height: 32px;
+    background-color: #006d01;
+    border-radius: 8px;
+    box-shadow: 0 -1px 5px 1px #444444, inset #444444 0 -1px 9px, #444444 0 2px 12px;
+}
+
+.led-blue {
+    margin: 20px auto;
+    width: 96px;
+    height: 32px;
+    background-color: #4AB;
+    box-shadow: #000 0 -1px 7px 1px, inset #006 0 -1px 9px, #06F 0 2px 14px;
+}
+
+#alarm-high-row {
+    display: none;
+}
+
+#alarm-number-row {
+    display: none;
+}
+
+#mes-content{
+    display:none;
+}
+
+.navbar-header{
+    width: 100%;
+    height: 100%;
+}
+
+.navbar.navbar-default.navbar-static-top {
+    height: 80px;
+}
+
+.page-header {
+    font-size: 18px;
+}
+
+#support-table {
+    padding: 15px;
+    border: 2px solid #00579e;
+    border-radius: 10px;
+}
+
+.omega-container {
+    padding: 15px;
+    border: 2px solid #00579e;
+    border-radius: 10px;
+    margin:10px;
+}
+
+.folha-table {
+    padding: 5px;
+    border: 2px solid #00579e;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.folha-table td {
+    text-align: center;
+}
+
+.folha-table th {
+    height: 60px;
+}
+
+.folha-table .row {
+    margin-top: 10px;
+}
+
+.row.match-my-cols {
+    overflow: hidden;
+}
+
+.table-responsive > .table > tbody > tr > td,
+.table-responsive > .table > tbody > tr > th,
+.table-responsive > .table > tfoot > tr > td,
+.table-responsive > .table > tfoot > tr > th,
+.table-responsive > .table > thead > tr > td,
+.table-responsive > .table > thead > tr > th {
+	white-space: pre-line;
+}
+
+#videocontent {
+    max-width: 640px;
+    width: 100%;
+}
+
+.filetree-back{
+    background: #EEEEEE;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.filetree {
+    border-top: solid 1px #BBB;
+    border-left: solid 1px #BBB;
+    border-bottom: solid 1px #FFF;
+    border-right: solid 1px #FFF;
+    background: #FFF;
+    overflow: scroll;
+    padding: 5px;
+    min-height: 300px;
+}
+
+@media (min-width: 900px) {
+    #main-img {
+        width: 600px;
+        length: auto;
+    }
+}
+
+@media (min-width: 340px) {
+
+    .font-highlight {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 411px) {
+    .page-header {
+        font-size: 20px;
+    }
+}
+
+/* width 768px and largers */
+@media (min-width: 768px) {
+    .page-header {
+        font-size: 28px;
+    }
+
+    .font-highlight {
+        font-size: 22px;
+    }
+
+    .gauge {
+        width: 250px;
+        height: 250px;
+    }
+
+    #support-table {
+        padding: 15px 15px 0px 15px;
+    }
+}
+
+/* --- Tree --- */
+.tree {
+    min-height:20px;
+    padding:19px;
+    margin-bottom:20px;
+    background-color:#fbfbfb;
+    border:1px solid #00579e;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    margin: 15px;
+}
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 5px;
+    position:relative
+}
+.tree li::before, .tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+.tree li::before {
+    border-left:1px solid #999;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.tree li::after {
+    border-top:1px solid #999;
+    height:20px;
+    top:25px;
+    width:25px
+}
+.tree li span {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid #999;
+    border-radius:5px;
+    display:inline-block;
+    padding:3px 8px;
+    text-decoration:none
+}
+.tree li.parent_li>span {
+    cursor:pointer
+}
+.tree>ul>li::before, .tree>ul>li::after {
+    border:0
+}
+.tree li:last-child::before {
+    height:30px
+}
+.tree li.parent_li>span:hover{
+    background:#eee;
+    border:1px solid #94a0b4;
+    color:#000
+}
+
+.folha-img {
+    height: 120px;
+}
+
+.machine + .tooltip > .tooltip-inner {
+      background-color: #cccccc;
+      border: 1px solid gray;
+      padding: 5px;
+}
+
+/* Tooltip on right */
+.machine + .tooltip.right > .tooltip-arrow {
+  border-right: 5px solid black;
+}
+
+#header-content {
+    position: absolute;
+    bottom: 0px;
+    left: 60px;
+}
+
+#page-wrapper {
+    min-height: 700px;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    z-index: 1;
+    position: absolute;
+    width: 200px;
+    margin-top: 81px;
+  }
+
+  #page-wrapper {
+    margin: 0 0 0 200px;
+    min-height: 700px;
+  }
+}
+
+#mi-supervisao {
+    background-color: #337ab7;
+    color: #ffffff;
+    margin: 3px 0px 5px 0px;
+}
+
+.nav>li>a {
+    padding: 15px 15px;
+}
+
+.datepicker-label {
+  display: inline-block;
+  text-align: right;
+  float: left;
+  padding: 5px 10px 5px 0px;
+  width:60px;
+}​
+
+ #dash-content {
+     margin-bottom: 40px;
+ }

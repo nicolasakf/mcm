@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-lg-12">
+          <h1 class="page-header">Medição - {{ machine.name }}</h1>
+    </div>
+</div>
+
+<div class="row match-my-cols">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="omega-container">
+            <div class="row" align="center">
+                <img src="/static/res/images/medicao/medicao-1.jpg" width="60%" style="max-width:300px">
+            </div>
+            <div class="row" align="center">
+                <div style="max-width:300px; min-width:150px; width:50%; padding-top: 20px;" align="left">
+                    <form>
+                        <label>Medida 1:</label>
+                        <input class="form-control" id="medida1">
+                        </br>
+                        <label>Medida 2:</label>
+                        <input class="form-control" id="medida2">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="omega-container">
+            <div class="row" align="center">
+                <img src="/static/res/images/medicao/medicao-2.jpg" width="60%" style="max-width:300px">
+            </div>
+            <div class="row" align="center">
+                <div style="max-width:300px; min-width:150px; width:50%; padding-top: 20px;" align="left">
+                    <form >
+                        <label>Medida 3:</label>
+                        <input class="form-control" id="medida3">
+                        </br>
+                        <label style="visibility:hidden;">Medida 2:</label>
+                        <input class="form-control" id="medida4" style="visibility:hidden;">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" align="center">
+    <button
+            id='download-btn'
+            type="button"
+            class="btn btn-primary"
+            style="margin:30px 10px 30px 10px; width:80%; max-width:300px;"
+            onclick="omega.medicao.clearFields()">Salvar Medição
+    </button>
+</div>

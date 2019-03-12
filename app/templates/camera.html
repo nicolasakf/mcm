@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-12">
+          <h1 class="page-header">Câmera - {{ machine.name }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12" align="center">
+
+        <div id="videocontent">
+            <video
+                    id="omega-st"
+                    class="video-js vjs-default-skin vjs-4-3 vjs-big-play-centered"
+                    controls
+                    controlsList="nodownload"
+                    preload="auto"
+                    width="640"
+                    height="480"
+                    poster="/static/res/images/omega_player.jpg"
+                    data-setup="{}">
+
+                <source src="{{ cam_addr }}" type='video/ogg'>
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='bower_components/video.js/dist/video.js') }}"></script>

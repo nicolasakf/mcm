@@ -1,0 +1,86 @@
+{% extends "mes_layout.html" %}
+
+{% block page_header %}
+<h1 class="page-header">MES Diário - {{ machine.name }}</h1>
+{% endblock page_header %}
+
+{% block datepicker %}
+<div class='col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12 col-xs-12'>
+    <div class="row">
+        <div class='col-lg-12'>
+            <div class='input-group date' id='datetimepicker'>
+                <input type='text' class="form-control"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 5px;">
+        <div class='col-lg-12' align='center'>
+            <button type="button" class="btn btn-primary load-btn" onclick="omega.mes.loadReport('daily');">Carregar MES</button>
+        </div>
+    </div>
+</div>
+{% endblock datepicker %}
+
+{% block produced_amount_heading %}
+<i class="fa fa-bar-chart-o fa-fw"></i> Quantidade Produzida
+{% endblock produced_amount_heading %}
+
+{% block op_amount_heading %}
+<i class="fa fa-bar-chart-o fa-fw"></i> Quantidade de Op.
+{% endblock op_amount_heading %}
+
+{% block production %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="center-div panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Acompanhamento de Produção
+                </div>
+                <!-- end panel heading -->
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-offset-1 col-lg-10 col-md-offset-0 col-md-12 col-sm-offset-0 col-sm-12 col-xs-offset-0 col-xs-12">
+                            <div id="googleTimeChartT1"></div>
+                            <div id="googleTimeChartT2"></div>
+                            <div id="googleTimeChartT3"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-offset-1 col-lg-10 col-md-offset-0 col-md-12 col-sm-offset-0 col-sm-12 col-xs-offset-0 col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Parada</th>
+                                            <th>Hora Inicial</th>
+                                            <th>Hora Final</th>
+                                            <th>Duração (min)</th>
+                                            <th>Motivo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="prod-table-body">
+
+                                    </tbody>
+                                </table>
+                                <!--end table-->
+                            </div>
+                            <!--end div table -->
+                        </div>
+                        <!--end column-->
+                    </div>
+                    <!--end row-->
+
+                </div>
+                <!--end panel body-->
+            </div>
+            <!-- end panel-->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row-->
+{% endblock production %}
+

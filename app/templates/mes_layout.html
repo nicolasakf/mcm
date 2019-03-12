@@ -1,0 +1,327 @@
+<div class="row">
+    <div class="col-lg-12">
+            {% block page_header %}{% endblock page_header %}
+    </div>
+</div>
+
+<div class="row" style="padding-bottom: 20px;">
+    {% block datepicker %}{% endblock datepicker %}
+</div>
+<!-- end row -->
+
+<div id="alert" class="alert alert-warning" style="display:none;">
+</div>
+
+<div id="mes-content">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="center-div panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Dados
+                        </div>
+                        <!-- end panel heading-->
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>SCC</td>
+                                                    <td id="scc"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Célula</td>
+                                                    <td id="cell"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Responsável</td>
+                                                    <td id="resp"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Data</td>
+                                                    <td id="date"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>N. Chave</td>
+                                                    <td id="pn"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--end table-->
+                                    </div>
+                                    <!--end div table -->
+                                </div>
+                                <!--end column-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!-- end panel body -->
+                    </div>
+                    <!--end panel-->
+                </div>
+                <!-- end column -->
+            </div>
+            <!--end row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="center-div panel panel-default">
+                        <div class="panel-heading">
+                            {% block produced_amount_heading %}{% endblock produced_amount_heading %}
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Turno 1</div>
+                                                    <div class="font-highlight" id="amount-t1"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end column -->
+
+                                <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Turno 2</div>
+                                                    <div class="font-highlight" id="amount-t2"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end column -->
+
+                                <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Turno 3</div>
+                                                    <div class="font-highlight" id="amount-t3"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end column -->
+
+                            </div>
+                            <!-- end row -->
+
+                            <div class="row">
+                                <div class="col-lg-offset-0 col-lg-12 col-md-offset-0 col-md-12 col-sm-offset-0 col-sm-12 col-xs-offset-2 col-xs-8">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Total</div>
+                                                    <div class="font-highlight" id="amount-total"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+
+                        </div>
+                        <!-- end panel body -->
+                    </div>
+                    <!--end panel-->
+                </div>
+                <!-- end column -->
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="center-div panel panel-default">
+                        <div class="panel-heading">
+                            {% block op_amount_heading %}{% endblock op_amount_heading %}
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Turno 1</div>
+                                                    <div class="font-highlight" id="op-amount-t1"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Turno 2</div>
+                                                    <div class="font-highlight" id="op-amount-t2"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-center">
+                                                    <div>Turno 3</div>
+                                                    <div class="font-highlight" id="op-amount-t3"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+                        </div>
+                        <!-- end panel body -->
+                    </div>
+                    <!--end panel-->
+                </div>
+                <!-- end column -->
+            </div>
+            <!-- end row -->
+
+        </div>
+        <!-- end columns-->
+
+        <div class="col-lg-6">
+            <div class="center-div panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Índices
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <div>Disponibilidade</div>
+                                            <div class="font-highlight" id="availability"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <div>Desempenho</div>
+                                            <div class="font-highlight" id="performance"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-offset-0 col-lg-4 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-2 col-xs-8">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <div>Qualidade</div>
+                                            <div class="font-highlight" id="quality"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-offset-1 col-lg-10 col-md-offset-2 col-md-8">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-offset-1 col-lg-10 col-md-offset-2 col-md-8">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <div>OEE</div>
+                                            <div class="font-highlight" id="oee"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end panel body -->
+            </div>
+            <!--end panel-->
+        </div>
+        <!-- end column-->
+
+    </div>
+    <!-- end row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="center-div panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Disponibilidade
+                </div>
+                <!-- end panel heading -->
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-0 col-sm-12 col-xs-offset-0 col-xs-12">
+                                    <canvas id="barChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col-->
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <div class="col-lg-10 col-lg-offset-0 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-offset-2 col-xs-8">
+                                    <canvas id="pieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end panel body-->
+            </div>
+            <!-- end panel-->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row-->
+
+    {% block production %}{% endblock production%}
+</div>
+<!--end mes-content-->

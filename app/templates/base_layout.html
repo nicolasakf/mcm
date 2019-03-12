@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Omega7 Systems">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/static/assets/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/static/assets/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/static/assets/favicon/manifest.json">
+    <link rel="mask-icon" href="/static/assets/favicon/safari-pinned-tab.svg" color="#2b5797">
+    <link rel="shortcut icon" href="/static/assets/favicon/favicon.ico">
+    <meta name="msapplication-config" content="/static/assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>ROMI Connect</title>
+
+    <link href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bower_components/metisMenu/dist/metisMenu.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bower_components/video.js/dist/video-js.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bower_components/components-font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bower_components/jqueryfiletree/dist/jQueryFileTree.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bower_components/jquery-ui/themes/base/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/sb-admin-2.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/omega.css') }}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    {% block scripts %}{% endblock %}
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+            <div class="navbar-header">
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10">
+                    <div class="navbar-brand" id="page-title">
+                        <img src="/static/res/images/romi_branco.png" height="100%" style="float: left;">
+                        <div id="header-content"> ROMI Connect </div>
+                    </div>
+                </div>
+
+                {% block menu_header %}{% endblock %}
+            </div>
+            <!-- /.navbar-header -->
+
+            {% block side_menu %}{% endblock %}
+        </nav>
+
+        {% block content %}{% endblock %}
+    </div>
+    <!-- /#wrapper -->
+
+    <div class="footer" align="center">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" align="center">
+            <a href="http://www.romi.com.br" >WWW.ROMI.COM.BR</a> | EXPOMAFE 2017
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" align="center">
+            <a href="http://bit.do/romiconnect" >http://bit.do/romiconnect</a>
+        </div>
+    </div>
+
+</body>
+</html>

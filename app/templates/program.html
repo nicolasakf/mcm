@@ -1,0 +1,158 @@
+<div class="row">
+    <div class="col-lg-12">
+          <h1 class="page-header">Operação - {{ machine.name }}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <!-- TABS -->
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#upload" data-toggle="tab">Envio</a>
+            </li>
+            <li>
+                <a href="#download" data-toggle="tab">Download</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+            <!-- UPLOAD PANE -->
+            <div class="tab-pane fade in active" id="upload">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12" >
+
+                        <div class="row" style='padding: 20px 0px 40px 0px'>
+                            <div class="col-lg-12">
+                                <p>Selecione os arquivos a serem enviados ao CNC:</p>
+                                <div align="center">
+                                    <label id='select-btn' class="btn btn-primary btn-file">
+                                        Selecionar arquivos... <input type="file" accept=".mpf" id="files_button" name="files[]" multiple style="display: none;">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p> Arquivos selecionados para envio:</p>
+                                <div class="filetree-back">
+                                    <div class="filetree">
+                                        <ul class="jqueryFileTree" id="upload-tree">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style='padding: 10px 0px 40px 0px'>
+                            <div class="col-lg-12">
+                                <div class="clearfix">
+                                    <button
+                                            id='clear-btn'
+                                            type="button"
+                                            class="btn btn-primary"
+                                            style="float: left"
+                                            onclick="omega.program.clearUploadList()">Limpar lista
+                                    </button>
+                                    <button
+                                            id='send-btn'
+                                            type="button"
+                                            class="btn btn-primary"
+                                            style="float: right"
+                                            onclick="omega.program.manageModal()">Enviar ao CNC
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel">Enviando Programa(s)</h4>
+                                                </div>
+                                                <div class="modal-body" align="center">
+                                                    <img id="loading-gif" src="/static/res/images/loading_small.gif">
+                                                    <div id="upload-success">
+                                                        <img src="/static/res/images/check_icon.png">
+                                                        <p>Envio realizado com sucesso!</p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button
+                                                            id='upload-cancel-btn'
+                                                            type="button"
+                                                            class="btn btn-danger"
+                                                            data-dismiss="modal"
+                                                            onclick="omega.program.cancelUpload()">Cancel
+                                                    </button>
+                                                    <button
+                                                            id='upload-ok-btn'
+                                                            type="button"
+                                                            class="btn btn-success"
+                                                            data-dismiss="modal"
+                                                            onclick="omega.program.sendFileList()">OK
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- DOWNLOAD PANE -->
+            <div class="tab-pane fade" id="download">
+
+                <div class="row" style="padding-top:20px;">
+                    <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12" >
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>Lista de programas presentes no CNC:</p>
+                                <div class="filetree-back">
+                                    <div class="filetree" id="download-tree"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style='padding: 10px 0px 40px 0px'>
+                            <div class="col-lg-12">
+                                <div class="clearfix">
+                                    <button
+                                            id='delete-btn'
+                                            type="button"
+                                            class="btn btn-primary"
+                                            style="float: left"
+                                            onclick="">Deletar
+                                    </button>
+                                    <button
+                                            id='download-btn'
+                                            type="button"
+                                            class="btn btn-primary"
+                                            style="float: right"
+                                            onclick="">Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

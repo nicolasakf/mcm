@@ -1,0 +1,30 @@
+{
+  "name": "romipiloto",
+  "authors": [
+    "Thiago Camargo Fernandes <thiago.fernandes@omega7systems.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
+    "bootstrap": "^3.3.7",
+    "jqueryfiletree": "^2.1.4",
+    "components-font-awesome": "^4.7.0",
+    "metisMenu": "^2.7.0",
+    "video.js": "videojs#^5.19.0",
+    "chart.js": "^2.5.0",
+    "moment": "^2.18.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
+  }
+}
