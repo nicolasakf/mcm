@@ -1,4 +1,4 @@
-#!../romipiloto_env/bin/python
+#!/bin/python
 from app import app
 
 app.run(host='0.0.0.0', port=80, debug=True, threaded=True)
