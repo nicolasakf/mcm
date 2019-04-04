@@ -13,7 +13,7 @@ def send_monitor_data():
     if not auth_user(user, passwd):
         return "Auth fail!\n", 400
 
-    machine_id = request.json.get('machineID');
+    machine_id = request.json.get('machineID')
 
     if machine_id is None:
         return "Machine not found!\n", 400

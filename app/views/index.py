@@ -20,7 +20,6 @@ def index_handler(machine_id='1'):
     if machine_id == '2':
         has_camera = False
 
-
     return render_template('layout.html',
                            machine_id=machine_id,
                            has_camera=has_camera)

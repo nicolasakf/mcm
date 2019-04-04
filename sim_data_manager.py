@@ -1,4 +1,4 @@
-#!/bin/python
+    #!/bin/python
 # -*- coding: utf-8 -*-
 from app.models.models import Machine, MachineStop, Report
 from app import db

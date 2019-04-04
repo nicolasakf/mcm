@@ -2,7 +2,7 @@ from datetime import timedelta, datetime
 from current_report import CurrentReport
 
 
-class Monitor():
+class Monitor:
     def __init__(self, id):
         self.machine_id = id
         self.currentReport = CurrentReport()

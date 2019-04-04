@@ -2,11 +2,14 @@ from flask_httpauth import HTTPBasicAuth
 
 auth = HTTPBasicAuth()
 
+USER = 'romi'
+PWD = 'romi'
+
 
 @auth.verify_password
 def verify_password(username, password):
     out = False
-    if (username == "omega7romi") and (password == 'expomafe2017'):
+    if (username == USER) and (password == PWD):
         out = True
 
     return out
@@ -14,7 +17,7 @@ def verify_password(username, password):
 
 def auth_user(user, passwd):
     out = False
-    if(user == "omega7romi") and (passwd == 'expomafe2017'):
+    if(user == USER) and (passwd == PWD):
         out = True
 
     return out

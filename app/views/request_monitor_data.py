@@ -9,7 +9,7 @@ def request_monitor_data(machine_id='1'):
     return json.dumps({
         "posx": "{:10.3f}".format(monitor.posX),
         "posy": "{:10.3f}".format(monitor.posY),
-        "posz" : "{:10.3f}".format(monitor.posZ),
+        "posz": "{:10.3f}".format(monitor.posZ),
         "spindle_load": monitor.spindleLoad,
         "spindle_speed": monitor.spindleSpeed,
         "cutting_time": str(monitor.cuttingTime),

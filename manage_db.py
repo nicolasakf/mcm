@@ -8,7 +8,5 @@ migrate = Migrate(app, db, directory='db/migrations/')
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-from app.models import models
-
 if __name__ == '__main__':
     manager.run()
