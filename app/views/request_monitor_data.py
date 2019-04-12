@@ -1,21 +1,25 @@
 from .. import app, monitorDict
 import json
+from app import db_lib as db
 
 
 @app.route('/maquina/<machine_id>/requestMonitorData', methods=['POST'])
 def request_monitor_data(machine_id='1'):
+
+    _data = db.select_monitor(user_id=0, machine_id=0)
+
     monitor = monitorDict[machine_id]
 
     return json.dumps({
         "posx": "{:10.3f}".format(monitor.posX),
         "posy": "{:10.3f}".format(monitor.posY),
         "posz": "{:10.3f}".format(monitor.posZ),
-        "spindle_load": monitor.spindleLoad,
-        "spindle_speed": monitor.spindleSpeed,
+        "spindle_load": _data['power'],
+        "spindle_speed": _data['rpm'],
         "cutting_time": str(monitor.cuttingTime),
-        "operating_time": str(monitor.operatingTime),
-        "poweron_time": str(monitor.powerOnTime),
-        "run_time": str(monitor.runTime),
+        "operating_time": str(_data['operating_time']),
+        "poweron_time": str(_data['power_on']),
+        "run_time": str(_data['run_time']),
         "parts_required": "{:10.0f}".format(monitor.reqParts),
         "parts_count": "{:10.0f}".format(monitor.totalParts),
         "velx": monitor.velX,
@@ -23,7 +27,7 @@ def request_monitor_data(machine_id='1'):
         "velz": monitor.velZ,
         "alarm_number": monitor.lastAlarm,
         "alarm_high": monitor.actualAlarm,
-        "avail": monitor.currentReport.get_availability(),
-        "feedrate": monitor.feedRateNck,
+        "avail": _data['availability'],
+        "feedrate": _data['rate'],
         "parts_hour": "{:6.2f}".format(monitor.currentReport.get_parts_per_hour())
     })

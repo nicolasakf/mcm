@@ -10,7 +10,7 @@ time = 0
 while True:
     rpm = np.random.randint(0, 15)
     power = np.random.randint(0, 100)
-    status = np.random.randint(1, 3)
+    status = np.random.randint(0, 3)
     run_time = dt.timedelta(seconds=time)
     power_on = dt.timedelta(seconds=time)
     operating_time = dt.timedelta(seconds=time)
