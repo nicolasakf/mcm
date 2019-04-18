@@ -238,17 +238,21 @@ var omega = (function(){
             var bg = null;
             var shadow = null;
 
-            /* RED */
-            if(value < 40){
-                newStatus = [false, false, true];
-            }
-            /* YELLOW */
-            else if(value >= 40 && value < 80){
-                newStatus = [false, true, false];
+            /* OFF */
+            if(value == 0){
+                newStatus = [false, false, false];
             }
             /* GREEN */
-            else{
+            else if(value == 1){
                 newStatus = [true, false, false];
+            }
+            /* YELLOW */
+            else if(value == 2){
+                newStatus = [false, true, false];
+            }
+            /* RED */
+            if(value == 3){
+                newStatus = [false, false, true];
             }
 
             for (var idx = 0; idx < ledStatus.length; idx++){
