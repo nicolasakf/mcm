@@ -246,12 +246,16 @@ var omega = (function(){
             else if(value == 1){
                 newStatus = [true, false, false];
             }
-            /* YELLOW */
+            /* GREEN BLINKING */
             else if(value == 2){
+                newStatus = ['BLINK', false, false];
+            }
+            /* YELLOW */
+            else if(value == 3){
                 newStatus = [false, true, false];
             }
             /* RED */
-            if(value == 3){
+            if(value == 4){
                 newStatus = [false, false, true];
             }
 
