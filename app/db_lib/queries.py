@@ -17,12 +17,13 @@ def select_monitor(machine_id, **kwargs):
     return _df.iloc[0, :]
 
 
-def select_mes(machine_id, **kwargs):
+def select_mes(machine_id, start, end, **kwargs):
 
     _query = """
         select * from insper.MES
         where MES.machine_id='{}'
-    """.format(machine_id)
+        and date >= '{}' and date <= '{}'
+    """.format(machine_id, start, end)
     _df = select(_query, **kwargs)
     _df.drop(['machine_id'], axis=1, inplace=True)
 

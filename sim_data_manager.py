@@ -46,7 +46,7 @@ def create_machines():
     out = []
 
     machine = Machine(
-        name= "ROMI DCM 620 5X HYBRID",
+        name= "Fanuc",
         pn= "M28405/406",
         scc="81822",
         celula="ROMI",
@@ -61,7 +61,7 @@ def create_machines():
     out.append(add_to_db(machine))
 
     machine = Machine(
-        name="ROMI GL 350B",
+        name="Romi",
         pn="M28405/406",
         scc="81822",
         celula="SCANIA",

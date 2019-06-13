@@ -15,6 +15,10 @@ def request_monitor_data(machine_id='1'):
     _data['status'] = 1
     if _data['emg_stat'] != 'Not emergency':  _data['status'] = 4
     elif _data['alm_stat'] != '****':  _data['status'] = 3
+    elif _data['pmc_alm1'] != '-1 - NO ALARM': _data['status'] = 3
+    elif _data['pmc_alm2'] != '-1 - NO ALARM': _data['status'] = 3
+    elif _data['pmc_alm3'] != '-1 - NO ALARM': _data['status'] = 3
+    # elif _data['pmc_alm4'] != '-1 - NO ALARM': _data['status'] = 3
     # elif _data['run_stat'] != '****':  _data['status'] = 1
     dt_init = dt.datetime(2000, 1, 1)
 
