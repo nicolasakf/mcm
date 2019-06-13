@@ -7,9 +7,10 @@ from app import db_lib as db
 
 @app.route('/maquina/<machine_id>/requestMonitorData', methods=['POST'])
 def request_monitor_data(machine_id='1'):
-    machine_dict = {'1': 16019005452, '2': 16019083464}
+    machine_dict = {'1': 7654321, '2': 1234567}
 
-    _data = db.select_monitor(machine_id=machine_dict[machine_id], host='localhost', user='root', password='F1nt5yn6!')
+    _data = db.select_last_mes(machine_id=machine_dict[machine_id], host='localhost', user='romi',
+                               password='romiconnect')
 
     # status treatment
     _data['status'] = 1

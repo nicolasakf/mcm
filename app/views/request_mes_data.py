@@ -16,8 +16,9 @@ def request_mes_data(machine_id='1'):
     start_date_str = request.json['date-start']
     end_date_str = request.json['date-end']
 
-    machine_dict = {'1': 16019005452, '2': 16019083464}
-    mes = db.select_mes(machine_dict[machine_id], start_date_str, end_date_str)
+    machine_dict = {'1': 7654321, '2': 1234567}
+    mes = db.select_mes(machine_dict[machine_id], start_date_str, end_date_str, host='localhost', user='romi',
+                               password='romiconnect')
     if mes.empty:
         output['msg'] = "Não existe relatório para data selecionada."
     mes.to_excel('/Users/NicolasFonteyne/Downloads/{} {}.xlsx'.format(dt.date.today(), machine_dict[machine_id]),
