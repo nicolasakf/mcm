@@ -21,10 +21,10 @@ def request_monitor_data(machine_id='1'):
     elif _data['pmc_alm3'] != '-1 - NO ALARM': _data['status'] = 3
     # elif _data['pmc_alm4'] != '-1 - NO ALARM': _data['status'] = 3
     # elif _data['run_stat'] != '****':  _data['status'] = 1
-    _data['timer_cut'] = _data['timer_cut'] / 60 / 60 / 24
-    _data['timer_op'] = _data['timer_op'] / 60 / 60 / 24
-    _data['timer_on'] = _data['timer_on'] / 60 / 60 / 24
-    _data['timer_run'] = _data['timer_run'] / 60 / 60 / 24
+    _data['timer_cut'] = dt.timedelta(_data['timer_cut'] / 60 / 60 / 24)
+    _data['timer_op'] = dt.timedelta(_data['timer_op'] / 60 / 60 / 24)
+    _data['timer_on'] = dt.timedelta(_data['timer_on'] / 60 / 60 / 24)
+    _data['timer_run'] = dt.timedelta(_data['timer_run'] / 60 / 60 / 24)
 
     monitor = monitorDict[machine_id]
 
