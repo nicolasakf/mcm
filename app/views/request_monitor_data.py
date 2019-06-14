@@ -21,7 +21,10 @@ def request_monitor_data(machine_id='1'):
     elif _data['pmc_alm3'] != '-1 - NO ALARM': _data['status'] = 3
     # elif _data['pmc_alm4'] != '-1 - NO ALARM': _data['status'] = 3
     # elif _data['run_stat'] != '****':  _data['status'] = 1
-    dt_init = dt.datetime(2000, 1, 1)
+    _data['timer_cut'] = _data['timer_cut'] / 60 / 60 / 24
+    _data['timer_op'] = _data['timer_op'] / 60 / 60 / 24
+    _data['timer_on'] = _data['timer_on'] / 60 / 60 / 24
+    _data['timer_run'] = _data['timer_run'] / 60 / 60 / 24
 
     monitor = monitorDict[machine_id]
 
@@ -31,10 +34,10 @@ def request_monitor_data(machine_id='1'):
         "posz": "{:10.3f}".format(_data['absZ']),
         "spindle_load": 0,
         "spindle_speed": _data['spdl'],
-        "cutting_time": (dt_init + dt.timedelta(seconds=_data['timer_cut'])).strftime('%H:%M:%S'),
-        "operating_time": (dt_init + dt.timedelta(seconds=_data['timer_op'])).strftime('%H:%M:%S'),
-        "poweron_time": (dt_init + dt.timedelta(seconds=_data['timer_on'])).strftime('%H:%M:%S'),
-        "run_time": (dt_init + dt.timedelta(seconds=_data['timer_run'])).strftime('%H:%M:%S'),
+        "cutting_time": dhms(_data['timer_cut']),
+        "operating_time": dhms(_data['timer_op']),
+        "poweron_time": dhms(_data['timer_on']),
+        "run_time": dhms(_data['timer_run']),
         "parts_required": "{:10.0f}".format(monitor.reqParts),
         "parts_count": "{:10.0f}".format(monitor.totalParts),
         "velx": monitor.velX,
@@ -49,3 +52,7 @@ def request_monitor_data(machine_id='1'):
         "parts_hour": "{:6.2f}".format(monitor.currentReport.get_parts_per_hour())
     })
     return _json
+
+
+def dhms(td):
+    return '{} dias {}:{}:{}'.format(td.days, td.seconds // 3600, (td.seconds // 60) % 60, td.seconds % 60)
