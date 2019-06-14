@@ -55,4 +55,4 @@ def request_monitor_data(machine_id='1'):
 
 
 def dhms(td):
-    return '{} dias {}:{}:{}'.format(td.days, td.seconds // 3600, (td.seconds // 60) % 60, td.seconds % 60)
+    return '{} d {:02d}:{:02d}:{:02d}'.format(td.days, td.seconds // 3600, (td.seconds // 60) % 60, td.seconds % 60)
