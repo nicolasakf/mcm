@@ -3,8 +3,6 @@ from time import time
 
 
 # SELECT QUERIES -------------------------------------------------------------------------------------------------------
-
-
 def select_monitor(machine_id, **kwargs):
 
     _query = """
@@ -46,47 +44,72 @@ def select_last_mes(machine_id, profile=False, **kwargs):
 
 
 # INSERT QUERIES -------------------------------------------------------------------------------------------------------
-def new_user(name, psswd, company):
-
-    if not isinstance(company, int):
-        _query = """
-            select company_id, name from romi_connect.company
-            where name='{}'
-        """.format(company)
-        _df = select(_query)
-        company = _df.iloc[0]['company_id']
+def new_user(name, pwd, company):
 
     _query = """
-        insert into `romi_connect`.user (user_id, name, password, company_id)
-        select if(max(user_id) is null, 1, max(user_id)+1), '{}', '{}', '{}' from romi_connect.user
-    """.format(name, psswd, company)
+        select name from insper.user
+        where name='{}'
+    """.format(name)
+    user_exists = not select(_query).empty
+    if user_exists:
+        raise ValueError('Ja existe um usuario com esse nome, favor escolher outro.')
+
+    _query = """
+        select company_id, name from insper.company
+        where name='{}'
+    """.format(company)
+    _df = select(_query)
+    try:  company = _df.iloc[0]['company_id']
+    except IndexError:  raise IndexError('Nao foi possivel achar a companhia especificada: {}'.format(company))
+
+    _query = """
+        insert into `insper`.user (user_id, name, password, company_id)
+        select if(max(user_id) is null, 1, max(user_id)+1), '{}', '{}', '{}' from insper.user
+    """.format(name, pwd, company)
     insert(_query)
+
+# new_user('nicolasakf', 'nicolas123', 'Insper')
 
 
 def new_machine(serial, name, **kwargs):
+
+    _query = """
+        select machine_id from insper.machine
+        where machine_id='{}'
+    """.format(serial)
+    mach_exists = not select(_query).empty
+    if mach_exists:
+        raise ValueError('Essa maquina ja esta listada na base de dados')
 
     _cols_str = ', '.join(['machine_id', 'name']+[k for k, v in kwargs if v is not None])
     _vals_str = ", ".join(["'{}'".format(serial), "'{}'".format(name)]+["'{}'".format(v) for k, v in kwargs if v is not None])
 
     _query = """
-        insert into `romi_connect`.machine ({cols})
+        insert into insper.machine ({cols})
         values({values})
     """.format(values=_vals_str, cols=_cols_str)
     insert(_query)
 
+# new_machine('7654321', 'INSPER_ROMI')
+
 
 def new_company(name, **kwargs):
+
+    _query = """
+        select name from insper.company
+        where name='{}'
+    """.format(name)
+    comp_exists = not select(_query).empty
+    if comp_exists:
+        raise ValueError('Essa empresa ja esta listada na base de dados')
 
     _cols_str = ', '.join(['company_id', 'name']+[k for k, v in kwargs if v is not None])
     _vals_str = ", ".join(["'{}'".format(name)]+["'{}'".format(v) for k, v in kwargs if v is not None])
 
     _query = """
-        insert into `romi_connect`.company ({cols})
-        select if(max(company_id) is null, 1, max(company_id)+1), {values} from `romi_connect`.company
+        insert into insper.company ({cols})
+        select if(max(company_id) is null, 1, max(company_id)+1), {values} from insper.company
     """.format(values=_vals_str, cols=_cols_str)
     insert(_query)
 
-# new_machine(16019083464, 'ROMI GL 240M (TORRE M) A2-5 CURTO V3.0 FANUC 0I-TD - ENSINO')
-# def assign_machine(username, machine_id):
-#     pass
-
+# new_company('Insper')
