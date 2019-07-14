@@ -1,25 +1,22 @@
 import mysql.connector
 import pandas as pd
 
-# HOST = 'localhost'
-# USER = 'root'
-# PWD = 'F1nt5yn6!'
-# DB = 'romi_connect'
+HOST = 'localhost'
+USER = 'root'
+PWD = 'F1nt5yn6!'
 
-HOST = '3.82.102.166'
-USER = 'romi'
-PWD = 'romiconnect'
-DB = 'insper'
+# HOST = '3.217.217.48'
+# USER = 'romi'
+# PWD = 'romiconnect'
 
 
-def _init_connection(host=HOST, user=USER, password=PWD, db=DB):
+def _init_connection(host=HOST, user=USER, password=PWD):
 
     _conn = mysql.connector.connect(
         use_pure=False,
         host=host,
         user=user,
         password=password,
-        # database=db
     )
     _cursor = _conn.cursor()
 

@@ -17,16 +17,18 @@ def request_mes_data(machine_id='1'):
     end_date_str = request.json['date-end']
 
     machine_dict = {'1': 7654321, '2': 1234567}
-    mes = db.select_mes(machine_dict[machine_id], start_date_str, end_date_str, host='localhost', user='romi',
+    mes = db.select_mes_period(machine_dict[machine_id], start_date_str, end_date_str, host='localhost', user='romi',
                                password='romiconnect')
     if mes.empty:
-        output['msg'] = "Não existe relatório para data selecionada."
+        output['msg'] = "Não existe relatório para a data selecionada."
     mes.to_excel('/Users/NicolasFonteyne/Downloads/{} {}.xlsx'.format(dt.date.today(), machine_dict[machine_id]),
                  index=False)
+
     # subprocess.Popen("open /Users/NicolasFonteyne/Downloads/{}.xlsx".format(dt.date.today()))
     # output['msg'] = "Exportado para /Users/NicolasFonteyne/Downloads/"
 
-    # return json.dumps(output), 200
+    output['ret_code'] = 0
+    return json.dumps(output), 200
 
     # if not request.json:
     #     abort(400)
@@ -217,7 +219,7 @@ def request_mes_data(machine_id='1'):
     # # valor só é enviado caso seja tipo diario
     # if mes_type == 'daily':
     #     output['prodTime'] = prod_time
-    #
+
     # output['ret_code'] = 0
     #
     # return json.dumps(output), 200

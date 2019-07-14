@@ -1,21 +1,10 @@
+# -*- coding: utf-8 -*-
 from connection import select, insert
 from time import time
 
 
 # SELECT QUERIES -------------------------------------------------------------------------------------------------------
-def select_monitor(machine_id, **kwargs):
-
-    _query = """
-        select * from romi_connect.monitor
-        where monitor.machine_id='{}'
-    """.format(machine_id)
-    _df = select(_query, **kwargs)
-    _df.drop(['machine_id'], axis=1, inplace=True)
-
-    return _df.iloc[0, :]
-
-
-def select_mes(machine_id, start, end, **kwargs):
+def select_mes_period(machine_id, start, end, **kwargs):
 
     _query = """
         select * from insper.MES
@@ -28,12 +17,31 @@ def select_mes(machine_id, start, end, **kwargs):
     return _df
 
 
-def select_last_mes(machine_id, profile=False, **kwargs):
+def select_mes_daily(machine_id, date, **kwargs):
+
+    _query = """
+        select * from insper.MES
+        where MES.machine_id='{}'
+        and date = '{}'
+    """.format(machine_id, date)
+    _df = select(_query, **kwargs)
+    _df.drop(['machine_id'], axis=1, inplace=True)
+
+    return _df
+
+
+def select_mes_realtime(machine_id, profile=False, **kwargs):
     t = time()
     _query = """
         select * from insper.MES
         where MES.machine_id='{}'
         order by MES.date DESC
+        limit 1;
+    """.format(machine_id)
+    _query = """
+        select * from romi_connect.monitor
+        where monitor.machine_id='{}'
+        order by monitor.date DESC
         limit 1;
     """.format(machine_id)
     _df = select(_query, **kwargs)
@@ -60,7 +68,7 @@ def new_user(name, pwd, company):
     """.format(company)
     _df = select(_query)
     try:  company = _df.iloc[0]['company_id']
-    except IndexError:  raise IndexError('Nao foi possivel achar a companhia especificada: {}'.format(company))
+    except IndexError:  raise IndexError('Não foi possível achar a companhia especificada: {}'.format(company))
 
     _query = """
         insert into `insper`.user (user_id, name, password, company_id)
@@ -71,6 +79,36 @@ def new_user(name, pwd, company):
 # new_user('nicolasakf', 'nicolas123', 'Insper')
 
 
+def user_has_machine(username, machine_list):
+
+    _query = """
+        select user_id from insper.user
+        where name='{}'
+    """.format(username)
+    try:  user_id = select(_query).iloc[0]['user_id']
+    except IndexError:  raise ValueError('Usuário inexistente')
+
+    _query = """
+        select machine_id from insper.machine
+        where machine_id in ('{}')
+    """.format("', '".join(machine_list))
+    u2m = select(_query)
+    if len(u2m) < len(machine_list):
+        raise ValueError('"machine_list" possui máquinas não listadas na base de dados.')
+
+    u2m['user_id'] = user_id
+    u2m = u2m[['user_id', 'machine_id']]
+
+    _query = """
+        insert into insper.user_has_machine (user_id, machine_id)
+        values(%s, %s)
+    """
+    _params = [tuple('{}'.format(val) for val in row) for row in u2m.values]
+    insert(_query, _params)
+
+# user2machine('nicolasakf', ['1234567', '7654321'])
+
+
 def new_machine(serial, name, **kwargs):
 
     _query = """
@@ -79,7 +117,7 @@ def new_machine(serial, name, **kwargs):
     """.format(serial)
     mach_exists = not select(_query).empty
     if mach_exists:
-        raise ValueError('Essa maquina ja esta listada na base de dados')
+        raise ValueError('Essa maquina já está listada na base de dados.')
 
     _cols_str = ', '.join(['machine_id', 'name']+[k for k, v in kwargs if v is not None])
     _vals_str = ", ".join(["'{}'".format(serial), "'{}'".format(name)]+["'{}'".format(v) for k, v in kwargs if v is not None])
@@ -101,7 +139,7 @@ def new_company(name, **kwargs):
     """.format(name)
     comp_exists = not select(_query).empty
     if comp_exists:
-        raise ValueError('Essa empresa ja esta listada na base de dados')
+        raise ValueError('Essa empresa já esta listada na base de dados.')
 
     _cols_str = ', '.join(['company_id', 'name']+[k for k, v in kwargs if v is not None])
     _vals_str = ", ".join(["'{}'".format(name)]+["'{}'".format(v) for k, v in kwargs if v is not None])

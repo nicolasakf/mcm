@@ -1,15 +1,14 @@
 """
 Modulo para copia da db na AWS no localhost
 """
-
 from connection import insert
-from queries import select_last_mes
+from queries import select_mes_realtime
 
-machine_ids = [16019083464, 16019005452]
+# machine_ids = [16019083464, 16019005452]
+machine_ids = [7654321, 1234567]
 while True:
-
     for mid in machine_ids:
-        _data = select_last_mes(mid)
+        _data = select_mes_realtime(mid, host='3.217.217.48', user='romi', password='romiconnect')
 
         values_str = "', '".join([str(_data['date']), str(_data['spdl']), str(_data['emg_stat']),
                                   str(_data['alm_stat']), str(_data['absX']), str(_data['absY']),
