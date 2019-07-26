@@ -26,7 +26,7 @@ def request_page_handler(machine_id='1'):
     http_code = 200
 
     machine_list = Machine.query.all()
-    machine = machine_list[(int(machine_id) -1)]
+    machine = machine_list[(int(machine_id) - 1)]
 
     if machine is not None:
         machine_data = {
@@ -36,8 +36,8 @@ def request_page_handler(machine_id='1'):
             "cnc_swv": machine.cnc_sw_ver,
             "mon_hw_ver": machine.mon_hw_ver,
             "mon_sw_ver": machine.mon_sw_ver,
-            "manual":machine.manual_filename,
-            "serial":machine.serial
+            "manual": machine.manual_filename,
+            "serial": machine.serial
         }
 
     if data is not None:

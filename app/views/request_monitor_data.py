@@ -10,11 +10,10 @@ from app import db_lib as db
 
 @app.route('/maquina/<machine_id>/requestMonitorData', methods=['POST'])
 def request_monitor_data(machine_id='1'):
-    machine_dict = {'1': 7654321, '2': 1234567}
+    machine_dict = {'1': 1234567, '2': 7654321}
 
     data = db.select_mes_realtime(machine_id=machine_dict[machine_id],
-                                  host='localhost'
-                                  )
+                                  host='localhost')
 
     # status treatment
     data['status'] = 1
@@ -38,10 +37,10 @@ def request_monitor_data(machine_id='1'):
         "posz": "{:10.3f}".format(data['absZ']),
         "spindle_load": 0,
         "spindle_speed": data['spdl'],
-        "cutting_time": dhms(data['timer_cut']),
-        "operating_time": dhms(data['timer_op']),
-        "poweron_time": dhms(data['timer_on']),
-        "run_time": dhms(data['timer_run']),
+        "cutting_time": dhm(data['timer_cut']),
+        "operating_time": dhm(data['timer_op']),
+        "poweron_time": dhm(data['timer_on']),
+        "run_time": dhm(data['timer_run']),
         "parts_required": "{:10.0f}".format(monitor.reqParts),
         "parts_count": "{:10.0f}".format(monitor.totalParts),
         "velx": monitor.velX,
@@ -58,5 +57,5 @@ def request_monitor_data(machine_id='1'):
     return _json
 
 
-def dhms(td):
+def dhm(td):
     return '{} d {:02d}:{:02d}'.format(td.days, td.seconds // 3600, (td.seconds // 60) % 60)
