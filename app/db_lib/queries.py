@@ -58,12 +58,6 @@ def select_mes_realtime(machine_id, profile=False, **kwargs):
         order by MES.date DESC
         limit 1;
     """.format(machine_id)
-    _query = """
-        select * from romi_connect.monitor
-        where monitor.machine_id='{}'
-        order by monitor.date DESC
-        limit 1;
-    """.format(machine_id)
     _df = select(_query, **kwargs)
     _df.drop(['machine_id'], axis=1, inplace=True)
     if profile:  print 'Time to load data: {:.2f}'.format(time()-t)
