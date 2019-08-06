@@ -1,13 +1,9 @@
 import mysql.connector
 import pandas as pd
 
-# HOST = 'localhost'
-# USER = 'root'
-# PWD = 'F1nt5yn6!'
-
-HOST = '3.217.217.48'
-USER = 'romi'
-PWD = 'romiconnect'
+HOST = 'localhost'
+USER = 'root'
+PWD = 'F1nt5yn6!'
 
 
 def _init_connection(host=HOST, user=USER, password=PWD):
