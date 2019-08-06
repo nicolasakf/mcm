@@ -1,19 +1,19 @@
+# -*- coding: utf-8 -*-
 """
-Rota da pagina "Monitoramento"
+This route callback is recursively called (1s interval) whenever a monitor tab is accessed
 """
 import datetime as dt
 
-from .. import app, monitorDict
+from .. import app
 import json
 from app import db_lib as db
 
 
 @app.route('/maquina/<machine_id>/requestMonitorData', methods=['POST'])
 def request_monitor_data(machine_id='1'):
-    machine_dict = {'1': 1234567, '2': 7654321}
+    from app.views.request_page import monitor_dict, machine_dict
 
-    data = db.select_mes_realtime(machine_id=machine_dict[machine_id],
-                                  host='localhost')
+    data = db.select_mes_realtime(machine_id=machine_dict[machine_id])
 
     # status treatment
     data['status'] = 1
@@ -22,14 +22,14 @@ def request_monitor_data(machine_id='1'):
     elif data['pmc_alm1'] != '-1 - NO ALARM': data['status'] = 3
     elif data['pmc_alm2'] != '-1 - NO ALARM': data['status'] = 3
     elif data['pmc_alm3'] != '-1 - NO ALARM': data['status'] = 3
-    # elif data['pmc_alm4'] != '-1 - NO ALARM': data['status'] = 3
+    elif data['pmc_alm4'] != '-1 - NO ALARM': data['status'] = 3
     # elif data['run_stat'] != '****':  data['status'] = 1
     data['timer_cut'] = dt.timedelta(data['timer_cut'] / 60 / 60 / 24)
     data['timer_op'] = dt.timedelta(data['timer_op'] / 60 / 60 / 24)
     data['timer_on'] = dt.timedelta(data['timer_on'] / 60 / 60 / 24)
     data['timer_run'] = dt.timedelta(data['timer_run'] / 60 / 60 / 24)
 
-    monitor = monitorDict[machine_id]
+    monitor = monitor_dict[machine_id]
 
     _json = json.dumps({
         "posx": "{:10.3f}".format(data['absX']),

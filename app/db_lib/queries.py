@@ -5,7 +5,14 @@ from time import time
 
 # SELECT QUERIES -------------------------------------------------------------------------------------------------------
 def select_mes_period(machine_id, start, end, **kwargs):
-
+    """
+    Selects MES data by period
+    :param machine_id: int;
+    :param start: datetime.date; start date for the period
+    :param end: datetime.date; end date for the period
+    :param kwargs: [see connection.select docstring]
+    :return: pd.DataFrame; MES table for selected period
+    """
     _query = """
         select * from insper.MES
         where MES.machine_id='{}'
@@ -18,7 +25,13 @@ def select_mes_period(machine_id, start, end, **kwargs):
 
 
 def select_mes_daily(machine_id, date, **kwargs):
-
+    """
+    Selects MES for a specific date
+    :param machine_id: int;
+    :param date: datetime.date; selected date
+    :param kwargs: [see connection.select docstring]
+    :return: pd.DataFrame; MES table for selected date
+    """
     _query = """
         select * from insper.MES
         where MES.machine_id='{}'
@@ -31,6 +44,13 @@ def select_mes_daily(machine_id, date, **kwargs):
 
 
 def select_mes_realtime(machine_id, profile=False, **kwargs):
+    """
+    Selects MES realtime
+    :param machine_id: int;
+    :param profile: bool;
+    :param kwargs: [see connection.select docstring]
+    :return: pd.DataFrame; MES table in realtime
+    """
     t = time()
     _query = """
         select * from insper.MES
@@ -52,6 +72,12 @@ def select_mes_realtime(machine_id, profile=False, **kwargs):
 
 
 def get_user_list(profile=False, **kwargs):
+    """
+    Returns a username to user id dictionary
+    :param profile: bool;
+    :param kwargs: [see connection.select docstring]
+    :return: pd.Series;
+    """
     t = time()
     _query = """
         select name, password from insper.user
@@ -64,6 +90,12 @@ def get_user_list(profile=False, **kwargs):
 
 
 def get_user_id(username, **kwargs):
+    """
+    Returns user id given a username
+    :param username: str;
+    :param kwargs: [see connection.select docstring]
+    :return: int;
+    """
     _query = """
         select user_id from insper.user
         where user.name = '{}'
@@ -75,6 +107,13 @@ def get_user_id(username, **kwargs):
 
 
 def get_machine_id_list(user_id, profile=False, **kwargs):
+    """
+    Returns a list of machine ids given a user id
+    :param user_id: int;
+    :param profile: bool;
+    :param kwargs: [see connection.select docstring]
+    :return: list;
+    """
     t = time()
     _query = """
         select m.machine_id from insper.machine m
@@ -87,9 +126,36 @@ def get_machine_id_list(user_id, profile=False, **kwargs):
     return list(_df['machine_id'])
 
 
+def get_machine_list(user_id, profile=False, **kwargs):
+    """
+    Returns a dataframe containing machine data for a given user id
+    :param user_id: int;
+    :param profile: bool;
+    :param kwargs: [see connection.select docstring]
+    :return: pd.DataFrame;
+    """
+    t = time()
+    _query = """
+        select m.machine_id, name, pn, scc, cnc, celula, cnc_sw_ver, mon_hw_ver, mon_sw_ver, img_filename, manual_filename
+        from insper.machine m
+        left join insper.user_has_machine uhm on uhm.machine_id=m.machine_id
+        where uhm.user_id = {}
+    """.format(user_id)
+    _df = select(_query, **kwargs)
+    if profile:  print 'Time to load data: {:.2f}'.format(time()-t)
+
+    return _df
+
+
 # INSERT QUERIES -------------------------------------------------------------------------------------------------------
 def new_user(name, pwd, company):
-
+    """
+    Creates a new user
+    :param name: str;
+    :param pwd: str;
+    :param company: str;
+    :return: void;
+    """
     _query = """
         select name from insper.user
         where name='{}'
@@ -112,11 +178,14 @@ def new_user(name, pwd, company):
     """.format(name, pwd, company)
     insert(_query)
 
-# new_user('nicolasakf', 'nicolas123', 'Insper')
-
 
 def user_has_machine(username, machine_list):
-
+    """
+    Assigns machines ids to a user
+    :param username: str;
+    :param machine_list: list;
+    :return: void;
+    """
     _query = """
         select user_id from insper.user
         where name='{}'
@@ -142,11 +211,15 @@ def user_has_machine(username, machine_list):
     _params = [tuple('{}'.format(val) for val in row) for row in u2m.values]
     insert(_query, _params)
 
-# user_has_machine('nicolasakf', ['1234567', '7654321'])
-
 
 def new_machine(serial, name, **kwargs):
-
+    """
+    Creates a new machine
+    :param serial: str;
+    :param name: str;
+    :param kwargs: machine specific data. See "machine" table at database.
+    :return: void;
+    """
     _query = """
         select machine_id from insper.machine
         where machine_id='{}'
@@ -164,11 +237,14 @@ def new_machine(serial, name, **kwargs):
     """.format(values=_vals_str, cols=_cols_str)
     insert(_query)
 
-# new_machine('7654321', 'INSPER_ROMI')
-
 
 def new_company(name, **kwargs):
-
+    """
+    Creates a new company
+    :param name: str;
+    :param kwargs: company specific data. See "company" table at database.
+    :return:
+    """
     _query = """
         select name from insper.company
         where name='{}'
@@ -185,5 +261,3 @@ def new_company(name, **kwargs):
         select if(max(company_id) is null, 1, max(company_id)+1), {values} from insper.company
     """.format(values=_vals_str, cols=_cols_str)
     insert(_query)
-
-# new_company('Insper')

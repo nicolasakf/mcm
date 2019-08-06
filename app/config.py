@@ -8,5 +8,6 @@ UPLOAD_FOLDER = '/var/tmp/romipiloto/uploads/'
 
 CAM_STREAM = {
     '1': 'http://azdebian.omega7systems.com:6010/cam0.ogv',
-    '2': 'http://azdebian.omega7systems.com:6010/cam1.ogv'
+    '2': 'http://azdebian.omega7systems.com:6010/cam1.ogv',
+    '3': 'http://azdebian.omega7systems.com:6010/cam1.ogv'
 }

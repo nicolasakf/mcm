@@ -1,7 +1,12 @@
+"""
+This route callback is called whenever a different machine is selected in the dashboard
+"""
 from flask import request
 from .. import app
-from flask import render_template, abort
+from flask import render_template
 from app.models.models import Machine
+from app.core.monitor import Monitor
+
 
 pageDict = {
     'monitor': 'monitor.html',
@@ -18,6 +23,10 @@ pageDict = {
     'dashboard': 'dashboard.html'
 }
 
+machine_list = None
+monitor_dict = None
+machine_dict = None
+
 
 @app.route('/maquina/<machine_id>/requestPage', methods=['POST'])
 def request_page_handler(machine_id='1'):
@@ -25,8 +34,14 @@ def request_page_handler(machine_id='1'):
     html = ''
     http_code = 200
 
-    machine_list = Machine.query.all()
-    machine = machine_list[(int(machine_id) - 1)]
+    _machine_list = Machine.query.all()
+    machine = _machine_list[(int(machine_id) - 1)]
+
+    _machine_list = Machine.query.all()
+    global machine_list, monitor_dict, machine_dict
+    machine_list = ['{}/'.format(i+1) for i in range(len(_machine_list))]
+    monitor_dict = {'{}'.format(i+1): Monitor(str(i+1)) for i in range(len(_machine_list))}
+    machine_dict = {'{}'.format(i+1): m.serial for i, m in enumerate(_machine_list)}
 
     if machine is not None:
         machine_data = {

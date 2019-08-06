@@ -1,13 +1,16 @@
 from .. import app
 from flask import render_template
 from app.core.utils import auth
-from sim_data_manager import main
+from sim_data_manager import create_machines, clean_db
 
 
 @app.route('/')
 @auth.login_required
 def dashboard():
-    main()
+    """ Root route """
+    from app.core.utils import USER_ID
+    clean_db()
+    create_machines(USER_ID)
     return render_template('dashboard.html')
 
 
@@ -15,13 +18,6 @@ def dashboard():
 @app.route('/maquina/<machine_id>/')
 @auth.login_required
 def index_handler(machine_id='1'):
-    has_camera = True
-    # if machine_id != '1' and machine_id != '2':
-    #     abort(404)
-
-    if machine_id == '2':
-        has_camera = False
-
+    """ Renders layout.html page accordingly to selected machine in dashboard """
     return render_template('layout.html',
-                           machine_id=machine_id,
-                           has_camera=has_camera)
+                           machine_id=machine_id)

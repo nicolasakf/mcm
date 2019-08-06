@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+This route callback is called whenever MES data is requested (either daily or period tabs)
+"""
 from .. import app
 import json
 from flask import request
@@ -8,6 +11,7 @@ import app.db_lib as db
 
 @app.route('/maquina/<machine_id>/requestMESData', methods=['POST'])
 def request_mes_data(machine_id='1'):
+    from app.views.request_page import machine_dict
     output = {}
 
     try:
@@ -17,7 +21,6 @@ def request_mes_data(machine_id='1'):
         start_date_str = request.json['date']
         end_date_str = None
 
-    machine_dict = {'1': 7654321, '2': 1234567}
     if end_date_str is None:
         mes = db.select_mes_daily(machine_dict[machine_id], start_date_str, host='localhost', user='romi',
                                   password='romiconnect')
@@ -32,5 +35,5 @@ def request_mes_data(machine_id='1'):
     # subprocess.Popen("open /Users/NicolasFonteyne/Downloads/{}.xlsx".format(dt.date.today()))
     # output['msg'] = "Exportado para /Users/NicolasFonteyne/Downloads/"
 
-    output['ret_code'] = 0
+    # output['ret_code'] = 0
     return json.dumps(output), 200
