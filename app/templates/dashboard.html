@@ -20,21 +20,13 @@
                 <ul>
                     <li> <span class="btn-success"><i class="fa fa-check"></i> Planta A</span>
                         <ul>
+                            {% for m in machines %}
                             <li>
-                                <a href="maquina/1/" data-toggle="tooltip" title="SN: 016019052420" data-placement="right">
-                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> INSPER_FANUC</span>
+                                <a href="maquina/{{loop.index}}/" data-toggle="tooltip" title="SN: 016019052420" data-placement="right">
+                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> {{m.name}}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="maquina/2/" data-toggle="tooltip" title="SN: 016019052499" data-placement="right">
-                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> INSPER_ROMI</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maquina/3/" data-toggle="tooltip" title="SN: 016019052499" data-placement="right">
-                                    <span class="btn-xs btn-success"><i class="fa fa-check"></i> ROMISHOWROOM</span>
-                                </a>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </li>
                 </ul>

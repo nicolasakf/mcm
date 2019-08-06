@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 from .. import app
 from flask import render_template
 from app.core.utils import auth
 from sim_data_manager import create_machines, clean_db
+from app.models.models import Machine
 
 
 @app.route('/')
@@ -11,7 +13,9 @@ def dashboard():
     from app.core.utils import USER_ID
     clean_db()
     create_machines(USER_ID)
-    return render_template('dashboard.html')
+
+    _machine_list = Machine.query.all()
+    return render_template('dashboard.html', machines=_machine_list)
 
 
 @app.route('/maquina/<machine_id>')
