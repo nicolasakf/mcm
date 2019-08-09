@@ -3,8 +3,9 @@
 This route callback is called whenever MES data is requested (either daily or period tabs)
 """
 from .. import app
+import os
 import json
-from flask import request
+from flask import request, send_file
 import datetime as dt
 import app.db_lib as db
 
@@ -29,8 +30,11 @@ def request_mes_data(machine_id='1'):
                                    password='romiconnect')
     if mes.empty:
         output['msg'] = "Não existe relatório para a data selecionada."
-    mes.to_excel('/Users/NicolasFonteyne/Downloads/{} {}.xlsx'.format(dt.date.today(), machine_dict[machine_id]),
-                 index=False)
+
+    filename = '{} {}.xlsx'.format(dt.date.today(), machine_dict[machine_id])
+    path = app.root_path + '/static/res/out'
+    mes.to_excel(path + filename, index=False)
+    return send_file(path + filename)
 
     # subprocess.Popen("open /Users/NicolasFonteyne/Downloads/{}.xlsx".format(dt.date.today()))
     # output['msg'] = "Exportado para /Users/NicolasFonteyne/Downloads/"
