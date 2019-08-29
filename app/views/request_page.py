@@ -52,7 +52,8 @@ def request_page_handler(machine_id='1'):
             "mon_hw_ver": machine.mon_hw_ver,
             "mon_sw_ver": machine.mon_sw_ver,
             "manual": machine.manual_filename,
-            "serial": machine.serial
+            "serial": machine.serial,
+            "id": machine_id
         }
 
     if data is not None:

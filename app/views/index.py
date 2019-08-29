@@ -13,7 +13,6 @@ def dashboard():
     from app.core.utils import USER_ID
     clean_db()
     create_machines(USER_ID)
-
     _machine_list = Machine.query.all()
     return render_template('dashboard.html', machines=_machine_list)
 

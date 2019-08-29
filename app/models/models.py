@@ -1,3 +1,4 @@
+
 from .. import db
 from sqlalchemy import Column
 from sqlalchemy.dialects.sqlite import INTEGER, TEXT
