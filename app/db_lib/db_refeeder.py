@@ -5,7 +5,7 @@ from connection import insert
 from queries import select_mes_realtime
 
 # machine_ids = [16019083464, 16019005452]
-machine_ids = [7654321, 1234567]
+machine_ids = [7654321, 1234567, ]
 while True:
     for mid in machine_ids:
         _data = select_mes_realtime(mid, host='3.217.217.48', user='romi', password='romiconnect')
