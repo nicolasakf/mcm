@@ -196,9 +196,9 @@ var omega = (function(){
             addFeedData(json['velx'], json['vely'], json['velz']);
             updateLed(json['feedrate']);
             updateAlarm(json['alarm_number'], json['alarm_high']);
-            updateAvailChart(json['avail'], json['spindle_load']);
+//            updateAvailChart(json['avail'], json['feedrate']);
             var timeHeader = document.getElementById("time-header");
-            timeHeader.innerText = "Última atualização: " + json['spindle_speed'];
+            timeHeader.innerHTML = "Última atualização: ";
 
         }
 

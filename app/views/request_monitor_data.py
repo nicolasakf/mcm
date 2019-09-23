@@ -35,9 +35,8 @@ def request_monitor_data(machine_id='1'):
         "posx": "{:10.3f}".format(data['absX']),
         "posy": "{:10.3f}".format(data['absY']),
         "posz": "{:10.3f}".format(data['absZ']),
-        # "spindle_load": 0,
-        "spindle_load": data['rate'],
-        # "spindle_speed": data['spdl'],
+        "spindle_load": 0,
+        "spindle_speed": data['spdl'],
         "cutting_time": dhm(data['timer_cut']),
         "operating_time": dhm(data['timer_op']),
         "poweron_time": dhm(data['timer_on']),
@@ -51,7 +50,8 @@ def request_monitor_data(machine_id='1'):
         "alarm_high": monitor.actualAlarm,
         "avail": 0,
         "feedrate": data['status'],
-        "spindle_speed": data['date'].strftime('%d-%m-%Y %H:%M:%S'),
+        # "rate": int(data['rate']),
+        "date": data['date'].strftime('%d-%m-%Y %H:%M:%S'),
         "parts_hour": "{:6.2f}".format(monitor.currentReport.get_parts_per_hour())
     })
     return _json
