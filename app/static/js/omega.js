@@ -197,6 +197,7 @@ var omega = (function(){
             updateLed(json['status']);
             updateAlarm(json['alarm_number'], json['alarm_high']);
             updateAvailChart(json['avail'], json['feedrate'])
+            $(".head h5").html(json['date'])
 
         }
 

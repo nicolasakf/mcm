@@ -61,7 +61,6 @@ def request_page_handler(machine_id='1'):
         page_url = pageDict[data['page-id']]
         html = render_template(page_url,
                                machine=machine_data,
-                               time=dt.datetime.now(),
                                cam_addr=app.config['CAM_STREAM'][machine_id])
     else:
         http_code = 400
