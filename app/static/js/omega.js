@@ -194,7 +194,7 @@ var omega = (function(){
             updateElementText('parts-hour', json['parts_hour'])
 
             addFeedData(json['velx'], json['vely'], json['velz']);
-            updateLed(json['status']);
+            updateLed(json['feedrate']);
             updateAlarm(json['alarm_number'], json['alarm_high']);
             updateAvailChart(json['avail'], json['feedrate'])
 
@@ -203,7 +203,7 @@ var omega = (function(){
         var updateAvailChart = function(avail, rate){
             dataAvail = google.visualization.arrayToDataTable([
                 ['', '%', { role: 'style' }],
-//                ['Availability (%)', avail*100, 'green'],
+                ['Availability (%)', avail*100, 'green'],
                 ['Rate (%)', rate, 'blue']
             ]);
             chartAvail.draw(dataAvail, google.charts.Bar.convertOptions(optionsAvail));
