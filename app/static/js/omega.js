@@ -76,8 +76,8 @@ var omega = (function(){
             ]);
 
             dataAvail = google.visualization.arrayToDataTable([
-                ['', '%', { role: 'style' }],
-                ['Availability (%)', 40, 'green'],
+                ['%', { role: 'style' }],
+//                ['Availability (%)', 40, 'green'],
                 ['Rate (%)', 60, 'blue']
             ]);
 
@@ -198,7 +198,7 @@ var omega = (function(){
             updateAlarm(json['alarm_number'], json['alarm_high']);
             updateAvailChart(json['avail'], json['rate']);
             var timeHeader = document.getElementById("time-header");
-            timeHeader.innerHTML = "Última atualização: " + json['date'];
+            timeHeader.innerText = "Última atualização: " + json['date'];
 
         }
 
