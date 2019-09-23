@@ -49,8 +49,8 @@ def request_monitor_data(machine_id='1'):
         "alarm_number": monitor.lastAlarm,
         "alarm_high": monitor.actualAlarm,
         "avail": 0,
-        "status": data['status'],
-        "feedrate": data['rate'],
+        "feedrate": data['status'],
+        "rate": data['rate'],
         "date": data['date'].strftime('%d-%m-%Y %H:%M:%S'),
         "parts_hour": "{:6.2f}".format(monitor.currentReport.get_parts_per_hour())
     })

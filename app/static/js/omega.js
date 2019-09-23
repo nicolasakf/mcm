@@ -194,16 +194,17 @@ var omega = (function(){
             updateElementText('parts-hour', json['parts_hour'])
 
             addFeedData(json['velx'], json['vely'], json['velz']);
-            updateLed(json['status']);
+            updateLed(json['feedrate']);
             updateAlarm(json['alarm_number'], json['alarm_high']);
-            updateAvailChart(json['avail'], json['feedrate'])
-            $(".head h5").html(json['date'])
+            updateAvailChart(json['avail'], json['rate']);
+            var timeHeader = document.getElementById("time-header");
+            timeHeader.innerHTML = "Última atualização: " + json['date'];
 
         }
 
         var updateAvailChart = function(avail, rate){
             dataAvail = google.visualization.arrayToDataTable([
-                ['', '%', { role: 'style' }],
+                ['%', { role: 'style' }],
 //                ['Availability (%)', avail*100, 'green'],
                 ['Rate (%)', rate, 'blue']
             ]);
