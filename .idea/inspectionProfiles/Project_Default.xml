@@ -4,7 +4,7 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="123">
+          <list size="124">
             <item index="0" class="java.lang.String" itemvalue="numba" />
             <item index="1" class="java.lang.String" itemvalue="bs4" />
             <item index="2" class="java.lang.String" itemvalue="pytrends" />
@@ -128,6 +128,7 @@
             <item index="120" class="java.lang.String" itemvalue="backtrader" />
             <item index="121" class="java.lang.String" itemvalue="colorama" />
             <item index="122" class="java.lang.String" itemvalue="openpyxl" />
+            <item index="123" class="java.lang.String" itemvalue="conda" />
           </list>
         </value>
       </option>
