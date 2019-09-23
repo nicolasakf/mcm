@@ -1,3 +1,4 @@
 .idea
 *.xml
 app/db_lib/Icon
+db

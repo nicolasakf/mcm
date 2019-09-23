@@ -2,6 +2,7 @@
 This route callback is called whenever a different machine is selected in the dashboard
 """
 from flask import request
+import datetime as dt
 from .. import app
 from flask import render_template
 from app.models.models import Machine
@@ -60,6 +61,7 @@ def request_page_handler(machine_id='1'):
         page_url = pageDict[data['page-id']]
         html = render_template(page_url,
                                machine=machine_data,
+                               time=dt.datetime.now(),
                                cam_addr=app.config['CAM_STREAM'][machine_id])
     else:
         http_code = 400
