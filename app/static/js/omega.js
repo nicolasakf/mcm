@@ -78,7 +78,7 @@ var omega = (function(){
             dataAvail = google.visualization.arrayToDataTable([
                 ['%', { role: 'style' }],
 //                ['Availability (%)', 40, 'green'],
-                ['Rate (%)', 60, 'blue']
+                ['Rate (%)', 0, 'blue']
             ]);
 
             dataFeed = google.visualization.arrayToDataTable([
