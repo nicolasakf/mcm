@@ -76,9 +76,9 @@ var omega = (function(){
             ]);
 
             dataAvail = google.visualization.arrayToDataTable([
-                ['%', { role: 'style' }],
-//                ['Availability (%)', 40, 'green'],
-                ['Rate (%)', 0, 'blue']
+                ['', '%', { role: 'style' }],
+                ['Availability (%)', 40, 'green'],
+                ['Rate (%)', 60, 'blue']
             ]);
 
             dataFeed = google.visualization.arrayToDataTable([
@@ -196,16 +196,14 @@ var omega = (function(){
             addFeedData(json['velx'], json['vely'], json['velz']);
             updateLed(json['feedrate']);
             updateAlarm(json['alarm_number'], json['alarm_high']);
-//            updateAvailChart(json['avail'], json['feedrate']);
-            var timeHeader = document.getElementById("time-header");
-            timeHeader.innerHTML = "Última atualização: ";
+            updateAvailChart(json['avail'], json['feedrate'])
 
         }
 
         var updateAvailChart = function(avail, rate){
             dataAvail = google.visualization.arrayToDataTable([
-                ['%', { role: 'style' }],
-//                ['Availability (%)', avail*100, 'green'],
+                ['', '%', { role: 'style' }],
+                ['Availability (%)', avail*100, 'green'],
                 ['Rate (%)', rate, 'blue']
             ]);
             chartAvail.draw(dataAvail, google.charts.Bar.convertOptions(optionsAvail));

@@ -2,7 +2,6 @@
 This route callback is called whenever a different machine is selected in the dashboard
 """
 from flask import request
-import datetime as dt
 from .. import app
 from flask import render_template
 from app.models.models import Machine
