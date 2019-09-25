@@ -33,13 +33,13 @@ def request_mes_data(machine_id='1'):
     return json.dumps(output), 200
 
 
-@app.route('/maquina/<machine_id>/downloads/')
+@app.route('/maquina/<machine_id>/downloads/', methods=['POST'])
 def download_mes(machine_id='1'):
     from app.views.request_page import machine_dict
     global start, end, mid
     while (start is None) or (end is None) or (mid is None):
         pass
-    print start, end
+    print start, end, machine_dict[machine_id]
     mes = db.select_mes_period(machine_dict[machine_id], start, end, host='localhost', user='romi',
                                password='romiconnect')
 
