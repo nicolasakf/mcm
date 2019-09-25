@@ -47,7 +47,5 @@ def download_mes(machine_id='1'):
     path = app.root_path + '/static/res/out/'
     mes.to_csv(path + filename, index=False)
     start = None; end = None; mid = None
-    out = send_file(path + filename, as_attachment=True, attachment_filename=filename)
-    os.remove(path + filename)
 
-    return out
+    return send_file(path + filename, as_attachment=True, attachment_filename=filename, cache_timeout=1)
