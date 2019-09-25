@@ -60,4 +60,4 @@ def download_mes(machine_id='1'):
     mes.to_csv(path + filename, index=False)
     start = None; end = None; mid = None
 
-    return send_file(path + filename, cache_timeout=1)
+    return send_file(path + filename, as_attachment=True, attachment_filename=path + filename)
