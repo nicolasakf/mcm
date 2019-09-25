@@ -17,7 +17,7 @@ def request_mes_data(machine_id='1'):
     global start, end, mid
 
     mid = machine_id
-    # output = {}
+    output = {}
 
     start_date_str = request.json['date-start']
     start = start_date_str
@@ -26,20 +26,11 @@ def request_mes_data(machine_id='1'):
 
     mes = db.select_mes_period(machine_dict[machine_id], start_date_str, end_date_str, host='localhost', user='romi',
                                password='romiconnect')
-    # if mes.empty:
-    #     output['msg'] = "Não existe relatório para a data selecionada."
+    if mes.empty:
+        output['msg'] = "Não existe relatório para a data selecionada."
+
     # output['ret_code'] = 0
-
-    filename = '{} {}.csv'.format(dt.datetime.now(), machine_dict[machine_id])
-    path = app.root_path + '/static/res/out/'
-    mes.to_csv(path + filename, index=False)
-    start = None;
-    end = None;
-    mid = None
-    out = send_file(path + filename, as_attachment=True, attachment_filename=filename)
-    os.remove(path + filename)
-
-    return out
+    return json.dumps(output), 200
 
 
 @app.route('/maquina/<machine_id>/downloads/')
