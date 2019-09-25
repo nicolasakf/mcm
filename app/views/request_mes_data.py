@@ -33,7 +33,7 @@ def request_mes_data(machine_id='1'):
     return json.dumps(output), 200
 
 
-@app.route('/maquina/<machine_id>/downloads/', methods=['POST'])
+@app.route('/maquina/<machine_id>/downloads/')
 def download_mes(machine_id='1'):
     from app.views.request_page import machine_dict
     global start, end, mid
