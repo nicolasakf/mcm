@@ -14,7 +14,7 @@
       '{{ url_for('static', filename='bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}',
       '{{ url_for('static', filename='bower_components/jqueryfiletree/dist/jQueryFileTree.min.js') }}',
       '{{ url_for('static', filename='bower_components/jquery-ui/jquery-ui.min.js') }}',
-      '{{ url_for('static', filename='js/omega.js') }}'
+      '{{ url_for('static', filename='js/omega.js', version='sdasdds') }}'
     ].forEach(function(src) {
         var script = document.createElement('script');
         script.src = src;
@@ -57,7 +57,7 @@
             </li>
             <li>
                 <a href="" onclick="omega.requestPage('mes_period'); return false;">
-                    <i class="fa fa-area-chart fa-fw"></i> MES
+                    <i class="fa fa-area-chart fa-fw"></i> MCM
                 </a>
             </li>
             <li>

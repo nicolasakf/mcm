@@ -1,7 +1,9 @@
 {% extends "mes_layout.html" %}
 
+<script src="/Users/NicolasFonteyne/GitHub_nicolasakf/romi_legacy/app/static/js/omega.js?newversion"></script>
+
 {% block page_header %}
-<h1 class="page-header">MES - {{ machine.name }}</h1>
+<h1 class="page-header">MCM - {{ machine.name }}</h1>
 {% endblock page_header %}
 
 {% block produced_amount_heading %}
@@ -38,9 +40,9 @@
     </div>
     <div class="row" style="padding-top: 5px;">
         <div class='col-lg-12' align='center'>
-            <a href="/maquina/{{ machine.id }}/downloads/" target="blank"><button type="button" class="btn btn-primary load-btn" onclick="omega.mes.loadReport('period');">Carregar MES</button></a>
+            <a href="/maquina/{{ machine.id }}/downloads/" target="blank"><button type="button" class="btn btn-primary load-btn" onclick="omega.mes.loadReport(true);">Baixar MCM</button></a>
+            <a target="blank"><button type="button" class="btn btn-primary load-btn" onclick="omega.mes.loadReport(false);">Carregar MCM</button></a>
         </div>
     </div>
 </div>
-
 {% endblock datepicker %}

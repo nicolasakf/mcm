@@ -2,29 +2,36 @@
 Modulo para copia da db na AWS no localhost
 """
 from connection import insert
-from queries import select_mes_realtime
+from queries import select
 
 # machine_ids = [16019083464, 16019005452]
-machine_ids = [7654321, 1234567, ]
-while True:
-    for mid in machine_ids:
-        _data = select_mes_realtime(mid, host='3.217.217.48', user='romi', password='romiconnect')
+machine_ids = ['016-020207-456']
+cols = ['absX', 'absY', 'absZ', 'alm_list_msg1', 'alm_list_msg2', 'alm_list_msg3', 'alm_stat', 'alm_type1',
+           'alm_type2', 'alm_type3', 'auto_stat', 'cnc_type', 'counter', 'counter_tgt', 'edit_stat', 'emg_stat',
+           'fdr', 'fdr_unit', 'ip', 'motion_stat', 'mt_type', 'prgname', 'rate', 'run_stat', 'series', 'spdl',
+           'spdl_unit', 'timer_cut', 'timer_on', 'timer_op', 'pmc_alm1', 'pmc_alm2', 'pmc_alm3', 'pmc_alm4',
+           'timer_run', 'name', 'date']
+# while True:
+# for mid in machine_ids:
 
-        values_str = "', '".join([str(_data['date']), str(_data['spdl']), str(_data['emg_stat']),
-                                  str(_data['alm_stat']), str(_data['absX']), str(_data['absY']),
-                                  str(_data['absZ']), str(_data['timer_cut']), str(_data['timer_on']),
-                                  str(_data['timer_op']), str(_data['timer_run']), str(mid), _data['pmc_alm1'],
-                                  _data['pmc_alm2'], _data['pmc_alm3'], _data['pmc_alm4']])
+for month in range(9, 11):
+    for day in range(1,32):
         query = """
-            insert into `romi_connect`.monitor (date, spdl, emg_stat, alm_stat, absX, absY, absZ,
-                                                timer_cut, timer_on, timer_op, timer_run, machine_id, 
-                                                pmc_alm1, pmc_alm2, pmc_alm3, pmc_alm4)
-            values ('{values}')
-            on duplicate key update date=values(date), spdl=values(spdl), emg_stat=values(emg_stat),
-                                    alm_stat=values(alm_stat),
-                                    absX=values(absX), absY=values(absY), absZ=values(absZ),
-                                    timer_cut=values(timer_cut), timer_on=values(timer_on), timer_op=values(timer_op),
-                                    timer_run=values(timer_run), pmc_alm1=values(pmc_alm1), pmc_alm2=values(pmc_alm2),
-                                    pmc_alm3=values(pmc_alm3), pmc_alm4=values(pmc_alm4)
-        """.format(values=values_str)
-        insert(query, host='localhost', user='root', password='F1nt5yn6!')
+            select * from insper.MES
+            where machine_id='{}' and month(date)={} and day(date)={}
+            order by date desc
+            limit 100
+        """.format('016-020207-456', month, day)
+
+        _data = select(query, host='3.217.217.48', user='romi', password='romiconnect')
+
+        if not _data.empty:
+            for i in range(len(_data)):
+                values_str = "', '".join([str(_data.iloc[i][col]).replace("'", '"') for col in cols])
+                columns_clause = ", ".join(cols) + ', machine_id'
+
+                query = """
+                    insert into insper.MES ({0})
+                    values ('{1}', '{2}')
+                """.format(columns_clause, values_str, '016-020207-456')
+                insert(query, host='localhost', user='root', password='F1nt5yn6!')

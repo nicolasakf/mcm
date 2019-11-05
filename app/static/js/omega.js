@@ -474,30 +474,7 @@ var omega = (function(){
                         fontSize: 14
                     }
                 }
-//                animation: {
-//                    hover: {animationDuration: 0},
-//                    onProgress: function (animation) {
-//                        var chartInstance = this.chart,
-//                            ctx = chartInstance.ctx;
-//                        ctx.font = Chart.helpers.fontString(14, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-//                        ctx.textAlign = 'center';
-//                        ctx.textBaseline = 'bottom';
-//
-//                        this.data.datasets.forEach(function (dataset, i) {
-//                            var meta = chartInstance.controller.getDatasetMeta(i);
-//                            meta.data.forEach(function (bar, index) {
-//                                var data = dataset.data[index];
-//                                ctx.fillText(data, bar._model.x, bar._model.y - 5);
-//                            });
-//                        });
-//                    }
-//                },
-//                tooltips: {
-//                    enabled: false
-//                },
-//                showTooltips: false
             }
-
             var myChart = new Chart(ctx, {
                 type: "bar",
                 data: data,
@@ -714,16 +691,11 @@ var omega = (function(){
             e.innerHTML = mesData.index.oee.toFixed(3);
         }
 
-        var requestData = function(type, date1, date2){
+        var requestData = function(date1, date2, download){
             var path = window.location.protocol + "//" + window.location.host + window.location.pathname;
             var jsonData = null;
 
-            if(type == 'daily'){
-                jsonData = {'type': type, 'date': date1};
-            }
-            else {
-                jsonData = {'type': type, 'date-start': date1, 'date-end': date2};
-            }
+            jsonData = {'type': type, 'date-start': date1, 'date-end': date2, 'download': download};
 
             $.ajax({
                 url: path + "requestMESData",
@@ -737,8 +709,18 @@ var omega = (function(){
                     {
                         if(mesData.ret_code == 0){
                             $("#alert").hide(0);
-                            if(omega.isGoogleLibReady() == true){
-                                omega.mes.startMES(type);
+                            debugger;
+                            document.getElementById('header1').style.opacity = 1;
+                            document.getElementById('header2').style.opacity = 1;
+                            document.getElementById('header4').style.opacity = 1;
+                            document.getElementById('header5').style.opacity = 1;
+                            for (let key in mesData) {
+                                try{
+                                    document.getElementById(key).src = "../.." + mesData[key];
+                                }
+                                catch (err) {
+                                    console.log(err);
+                                }
                             }
                         }
                         else {
@@ -796,19 +778,13 @@ var omega = (function(){
             return out;
         }
 
-        myMES.loadReport = function(type){
+        myMES.loadReport = function(download){
             var date1 = null;
             var date2 = null;
 
-            if(type == 'daily'){
-                date1 = $('#datetimepicker').data("DateTimePicker").date().format("YYYY-MM-DD");
-                requestData(type, date1);
-            }
-            else if(type == 'period'){
-                date1 = $('#datetimepicker-start').data("DateTimePicker").date().format("YYYY-MM-DD");
-                date2 = $('#datetimepicker-end').data("DateTimePicker").date().format("YYYY-MM-DD");
-                requestData(type, date1, date2);
-            }
+            date1 = $('#datetimepicker-start').data("DateTimePicker").date().format("YYYY-MM-DD");
+            date2 = $('#datetimepicker-end').data("DateTimePicker").date().format("YYYY-MM-DD");
+            requestData(date1, date2, download);
         }
 
         return myMES;

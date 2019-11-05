@@ -17,6 +17,7 @@ def select_mes_period(machine_id, start, end, **kwargs):
         select * from insper.MES
         where MES.machine_id='{}'
         and date >= '{}' and date <= '{}'
+        order by date asc
     """.format(machine_id, start, end)
     _df = select(_query, **kwargs)
     _df.drop(['machine_id'], axis=1, inplace=True)
