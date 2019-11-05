@@ -11,7 +11,7 @@ import numpy as np
 import os, shutil
 from time import sleep
 
-RELPATH = 'app/static/res/figures'
+RELPATH = './app/static/res/figures'
 
 
 def _format_df(df):
