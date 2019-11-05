@@ -714,6 +714,10 @@ var omega = (function(){
                             document.getElementById('header2').style.opacity = 1;
                             document.getElementById('header4').style.opacity = 1;
                             document.getElementById('header5').style.opacity = 1;
+                            document.getElementById('container1').style.opacity = 1;
+                            document.getElementById('container2').style.opacity = 1;
+                            document.getElementById('container3').style.opacity = 1;
+                            document.getElementById('container4').style.opacity = 1;
                             for (let key in mesData) {
                                 try{
                                     document.getElementById(key).src = "../.." + mesData[key];
