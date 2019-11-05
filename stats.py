@@ -75,7 +75,7 @@ def export_figures(figs):
     shutil.rmtree(RELPATH)
     os.mkdir(RELPATH)
     for ft, f in figs.items():
-        filepath = '{}/{}'.format(RELPATH, dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
+        filepath = RELPATH + '/' + str(dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
         f.savefig(filepath)
         out[ft] = filepath[3:]
 
