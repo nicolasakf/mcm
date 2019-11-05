@@ -50,7 +50,7 @@ et-xmlfile==1.0.1
 fastcache==1.0.2
 fbprophet==0.3.post2
 filelock==3.0.4
-Flask==0.12
+Flask==1.0
 Flask-Compress==1.4.0
 Flask-Cors==3.0.4
 Flask-HTTPAuth==3.2.2
