@@ -35,10 +35,11 @@ def request_mes_data(machine_id='1'):
         df_dict = stats.timebar_enumerate(mes,
             ['alm_list_msg1', 'alm_list_msg2', 'alm_list_msg3', 'alm_stat', 'alm_type1', 'alm_type2', 'alm_type3',
              'auto_stat', 'edit_stat', 'emg_stat', 'motion_stat', 'run_stat', 'pmc_alm1', 'pmc_alm2', 'pmc_alm3',
-             'pmc_alm4'])
+             'pmc_alm4', 'prgname'])
         out.update(stats.export_figures(stats.plot_timeline(df_dict)))
         return json.dumps(out), 200
-    else:  return
+    else:
+        return out
 
 
 @app.route('/maquina/<machine_id>/downloads/')

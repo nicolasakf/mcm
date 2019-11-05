@@ -9,7 +9,6 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import os, shutil
-from time import sleep
 
 RELPATH = './app/static/res/figures'
 
@@ -72,8 +71,11 @@ def plot_timeline(df_dict):
 
 def export_figures(figs):
     out = {}
-    shutil.rmtree(RELPATH)
-    os.mkdir(RELPATH)
+    try:
+        shutil.rmtree(RELPATH)
+        os.mkdir(RELPATH)
+    except OSError:
+        pass
     for ft, f in figs.items():
         filepath = RELPATH + '/' + str(dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
         f.savefig(filepath)
