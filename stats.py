@@ -77,7 +77,7 @@ def export_figures(figs):
     for ft, f in figs.items():
         filepath = RELPATH + '/' + str(dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
         f.savefig(filepath)
-        out[ft] = filepath[3:]
+        out[ft] = filepath[5:]
 
     return out
 
