@@ -708,9 +708,9 @@ var omega = (function(){
                     if(mesData != null)
                     {
                         if(mesData.ret_code == 0){
+                            // load
                             $("#alert").hide(0);
-                            debugger;
-                            document.getElementById('images').style.opacity = 1;
+                            $("#report-images").show();
                             for (let key in mesData) {
                                 try{
                                     document.getElementById(key).src = "../.." + mesData[key];
@@ -720,7 +720,13 @@ var omega = (function(){
                                 }
                             }
                         }
+                        else if (mesData.ret_code == 1) {
+                            // download
+                            $("#alert").hide(0);
+                        }
                         else {
+                            // error
+                            $("#mes-content").hide();
                             $("#alert").html(mesData.msg)
                             $("#alert").show();
                         }
@@ -729,7 +735,7 @@ var omega = (function(){
                 error: function(error) {
                     console.log(error);
                 },
-                timeout: 10000
+                timeout: 100000
             });
         }
 
@@ -963,6 +969,7 @@ var omega = (function(){
                 omega.mes.loadReport('daily');
             }
             else if(id == 'mes_period'){
+                $("#report-images").hide();
                 $('#datetimepicker-start').datetimepicker({defaultDate: moment().add(-1, 'month').format(), format: 'LL', locale: 'pt-br', calendarWeeks: true});
                 $('#datetimepicker-end').datetimepicker({defaultDate: moment().format(), format: 'LL', locale: 'pt-br', calendarWeeks: true});
             }

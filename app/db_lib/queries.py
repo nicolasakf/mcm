@@ -4,25 +4,29 @@ from time import time
 
 
 # SELECT QUERIES -------------------------------------------------------------------------------------------------------
-def select_mes_period(machine_id, start, end, **kwargs):
+def select_mes_period(machine_id, start, end, tags=None, **kwargs):
     """
     Selects MES data by period
     :param machine_id: int;
     :param start: datetime.date; start date for the period
     :param end: datetime.date; end date for the period
+    :param tags: list; columns to be selected
     :param kwargs: [see connection.select docstring]
     :return: pd.DataFrame; MES table for selected period
     """
+    if tags is None:
+        tags = ['alm_list_msg1', 'alm_list_msg2', 'alm_list_msg3', 'alm_stat', 'alm_type1', 'alm_type2', 'alm_type3',
+                'auto_stat', 'edit_stat', 'emg_stat', 'motion_stat', 'run_stat', 'pmc_alm1', 'pmc_alm2', 'pmc_alm3',
+                'pmc_alm4', 'prgname', 'name', 'date']
     _query = """
-        select * from insper.MES
+        select {} from insper.MES
         where MES.machine_id='{}'
         and date >= '{}' and date <= '{}'
         order by date asc
-    """.format(machine_id, start, end)
-    _df = select(_query, **kwargs)
-    _df.drop(['machine_id'], axis=1, inplace=True)
+    """.format(', '.join(tags), machine_id, start, end)
+    out = select(_query, **kwargs)
 
-    return _df
+    return out
 
 
 def select_mes_daily(machine_id, date, **kwargs):
@@ -61,7 +65,7 @@ def select_mes_realtime(machine_id, profile=False, **kwargs):
     """.format(machine_id)
     _df = select(_query, **kwargs)
     _df.drop(['machine_id'], axis=1, inplace=True)
-    if profile:  print 'Time to load data: {:.2f}'.format(time()-t)
+    if profile:  print 'Time to load data: {:.2f}'.format(time() - t)
 
     return _df.iloc[0, :]
 
@@ -79,7 +83,7 @@ def get_user_list(profile=False, **kwargs):
     """
     _df = select(_query, **kwargs)
     _df.set_index('name', inplace=True)
-    if profile:  print 'Time to load data: {:.2f}'.format(time()-t)
+    if profile:  print 'Time to load data: {:.2f}'.format(time() - t)
 
     return _df.iloc[:, 0]
 
@@ -97,8 +101,10 @@ def get_user_id(username, **kwargs):
     """.format(username)
     _df = select(_query, **kwargs)
 
-    try:  return _df.iloc[0, 0]
-    except IndexError:  raise ValueError('Usuário inexistente')
+    try:
+        return _df.iloc[0, 0]
+    except IndexError:
+        raise ValueError('Usuário inexistente')
 
 
 def get_machine_id_list(user_id, profile=False, **kwargs):
@@ -116,7 +122,7 @@ def get_machine_id_list(user_id, profile=False, **kwargs):
         where uhm.user_id = {}
     """.format(user_id)
     _df = select(_query, **kwargs)
-    if profile:  print 'Time to load data: {:.2f}'.format(time()-t)
+    if profile:  print 'Time to load data: {:.2f}'.format(time() - t)
 
     return list(_df['machine_id'])
 
@@ -137,7 +143,7 @@ def get_machine_list(user_id, profile=False, **kwargs):
         where uhm.user_id = {}
     """.format(user_id)
     _df = select(_query, **kwargs)
-    if profile:  print 'Time to load data: {:.2f}'.format(time()-t)
+    if profile:  print 'Time to load data: {:.2f}'.format(time() - t)
 
     return _df
 
@@ -164,8 +170,10 @@ def new_user(name, pwd, company):
         where name='{}'
     """.format(company)
     _df = select(_query)
-    try:  company = _df.iloc[0]['company_id']
-    except IndexError:  raise IndexError('Não foi possível achar a companhia especificada: {}'.format(company))
+    try:
+        company = _df.iloc[0]['company_id']
+    except IndexError:
+        raise IndexError('Não foi possível achar a companhia especificada: {}'.format(company))
 
     _query = """
         insert into `insper`.user (user_id, name, password, company_id)
@@ -185,8 +193,10 @@ def user_has_machine(username, machine_list):
         select user_id from insper.user
         where name='{}'
     """.format(username)
-    try:  user_id = select(_query).iloc[0]['user_id']
-    except IndexError:  raise ValueError('Usuário inexistente')
+    try:
+        user_id = select(_query).iloc[0]['user_id']
+    except IndexError:
+        raise ValueError('Usuário inexistente')
 
     _query = """
         select machine_id from insper.machine
@@ -223,8 +233,9 @@ def new_machine(serial, name, **kwargs):
     if mach_exists:
         raise ValueError('Essa maquina já está listada na base de dados.')
 
-    _cols_str = ', '.join(['machine_id', 'name']+[k for k, v in kwargs if v is not None])
-    _vals_str = ", ".join(["'{}'".format(serial), "'{}'".format(name)]+["'{}'".format(v) for k, v in kwargs if v is not None])
+    _cols_str = ', '.join(['machine_id', 'name'] + [k for k, v in kwargs if v is not None])
+    _vals_str = ", ".join(
+        ["'{}'".format(serial), "'{}'".format(name)] + ["'{}'".format(v) for k, v in kwargs if v is not None])
 
     _query = """
         insert into insper.machine ({cols})
@@ -248,8 +259,8 @@ def new_company(name, **kwargs):
     if comp_exists:
         raise ValueError('Essa empresa já esta listada na base de dados.')
 
-    _cols_str = ', '.join(['company_id', 'name']+[k for k, v in kwargs if v is not None])
-    _vals_str = ", ".join(["'{}'".format(name)]+["'{}'".format(v) for k, v in kwargs if v is not None])
+    _cols_str = ', '.join(['company_id', 'name'] + [k for k, v in kwargs if v is not None])
+    _vals_str = ", ".join(["'{}'".format(name)] + ["'{}'".format(v) for k, v in kwargs if v is not None])
 
     _query = """
         insert into insper.company ({cols})

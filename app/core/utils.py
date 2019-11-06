@@ -18,3 +18,15 @@ def verify_password(username, password):
             return True
     except KeyError:
         return False
+
+
+def dhm(td):
+    return '{} d {:02d}:{:02d}'.format(td.days, td.seconds // 3600, (td.seconds // 60) % 60)
+
+
+def hms(td):
+    return '{:02d}:{:02d}:{:02d}'.format(td.seconds // 3600, (td.seconds // 60) % 60, td.seconds % 60)
+
+
+def h(td):
+    return '{}h'.format(td.seconds // 3600)

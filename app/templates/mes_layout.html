@@ -7,17 +7,19 @@
 <div class="row" style="padding-bottom: 20px;">
     {% block datepicker %}{% endblock datepicker %}
 </div>
-<!-- end row -->
 
-<div id="images" style="opacity: 0;">
-    <div class="omega-container">
-        <h3>ALARM LIST MESSAGE</h3>
+<div id="alert" class="alert alert-warning" style="display:none;">
+</div>
+
+<div id="report-images">
+    <div class="omega-container" id="container1">
+        <h3 id="header1">ALARM LIST MESSAGE</h3>
         <img src="" id="alm_list_msg1"/>
         <img src="" id="alm_list_msg2"/>
         <img src="" id="alm_list_msg3"/>
     </div>
-    <div class="omega-container">
-        <h3>PMC ALARM</h3>
+    <div class="omega-container" id="container2">
+        <h3 id="header2">PMC ALARM</h3>
         <div class="row" style="padding-top: 5px;">
             <img src="" id="pmc_alm1"/>
             <img src="" id="pmc_alm2"/>
@@ -25,24 +27,21 @@
             <img src="" id="pmc_alm4"/>
         </div>
     </div>
-    <div class="omega-container">
-        <h3>ALARM TYPE</h3>
+    <div class="omega-container" id="container3">
+        <h3 id="header4">ALARM TYPE</h3>
         <img src="" id="alm_stat"/>
         <img src="" id="alm_type1"/>
         <img src="" id="alm_type2"/>
         <img src="" id="alm_type3"/>
     </div>
-    <div class="omega-container">
-        <h3>ALARM STATUS</h3>
+    <div class="omega-container" id="container4">
+        <h3 id="header5">ALARM STATUS</h3>
         <img src="" id="auto_stat"/>
         <img src="" id="edit_stat"/>
         <img src="" id="emg_stat"/>
         <img src="" id="motion_stat"/>
         <img src="" id="run_stat"/>
     </div>
-</div>
-
-<div id="alert" class="alert alert-warning" style="display:none;">
 </div>
 
 <div id="mes-content">

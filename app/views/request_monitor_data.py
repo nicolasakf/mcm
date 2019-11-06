@@ -7,6 +7,7 @@ import datetime as dt
 from .. import app
 import json
 from app import db_lib as db
+from app.core.utils import dhm
 
 
 @app.route('/maquina/<machine_id>/requestMonitorData', methods=['POST'])
@@ -54,7 +55,3 @@ def request_monitor_data(machine_id='1'):
         "parts_hour": "{:6.2f}".format(monitor.currentReport.get_parts_per_hour())
     })
     return _json
-
-
-def dhm(td):
-    return '{} d {:02d}:{:02d}'.format(td.days, td.seconds // 3600, (td.seconds // 60) % 60)
