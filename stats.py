@@ -12,7 +12,7 @@ import numpy as np
 import os, shutil
 from app.core.utils import h
 
-RELPATH = './app/static/res/figures'
+RELPATH = '/app/static/res/figures'
 
 
 def _format_df(df):
@@ -82,13 +82,14 @@ def plot_timeline(df_dict):
 
 def export_figures(figs):
     out = {}
+    cwd = os.getcwd()
     try:
-        shutil.rmtree(RELPATH)
-        os.mkdir(RELPATH)
+        shutil.rmtree(cwd+RELPATH)
+        os.mkdir(cwd+RELPATH)
     except OSError:
         pass
     for ft, f in figs.items():
-        filepath = RELPATH + '/' + str(dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
+        filepath = cwd + RELPATH + '/' + str(dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
         f.savefig(filepath, bbox_inches='tight')
         out[ft] = filepath[5:]
 
