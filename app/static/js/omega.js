@@ -735,7 +735,7 @@ var omega = (function(){
                 error: function(error) {
                     console.log(error);
                 },
-                timeout: 100000
+                timeout: 1000000
             });
         }
 
