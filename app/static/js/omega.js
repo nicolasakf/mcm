@@ -711,8 +711,7 @@ var omega = (function(){
                             // load
                             $("#alert").hide(0);
                             $("#report-images").show();
-                            for (let key in mesData) {
-                                debugger;
+                            for (var key in mesData) {
                                 try{
                                     document.getElementById(key).src = "../.." + mesData[key];
                                 }
@@ -736,7 +735,7 @@ var omega = (function(){
                 error: function(error) {
                     console.log(error);
                 },
-                timeout: 1000000
+                timeout: 60000  // 1 min
             });
         }
 
