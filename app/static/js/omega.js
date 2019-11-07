@@ -704,10 +704,10 @@ var omega = (function(){
                 data: JSON.stringify(jsonData),
                 contentType: 'application/json;charset=UTF-8',
                 success: function(response) {
+                    $("#loader").hide();
                     mesData = JSON.parse(response);
-                    if(mesData != null)
-                    {
-                        if(mesData.ret_code == 0){
+                    if(mesData != null) {
+                        if(mesData.ret_code == 0) {
                             // load
                             $("#alert").hide(0);
                             $("#report-images").show();
@@ -736,7 +736,7 @@ var omega = (function(){
                     console.log(error);
                 },
                 timeout: 60000  // 1 min
-            });
+                });
         }
 
         myMES.startMES = function(type){
@@ -781,6 +781,9 @@ var omega = (function(){
         }
 
         myMES.loadReport = function(download){
+            $("#loader").show();
+            $("#report-images").hide();
+
             var date1 = null;
             var date2 = null;
 
@@ -970,6 +973,7 @@ var omega = (function(){
             }
             else if(id == 'mes_period'){
                 $("#report-images").hide();
+                $("#loader").hide();
                 $('#datetimepicker-start').datetimepicker({defaultDate: moment().add(-1, 'month').format(), format: 'LL', locale: 'pt-br', calendarWeeks: true});
                 $('#datetimepicker-end').datetimepicker({defaultDate: moment().format(), format: 'LL', locale: 'pt-br', calendarWeeks: true});
             }
