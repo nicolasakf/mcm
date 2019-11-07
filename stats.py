@@ -12,7 +12,7 @@ import numpy as np
 import os, shutil
 from app.core.utils import h
 
-ROOTPATH = '~/romi_legacy_new/app/static/res/figures'
+ROOTPATH = '/home/app/romi_legacy_new/app/static/res/figures'
 
 
 def _format_df(df):
