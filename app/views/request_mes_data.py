@@ -28,7 +28,7 @@ def request_mes_data(machine_id='1'):
 
     if mes.empty:
         out['ret_code'] = 9
-        out['msg'] = "Não existe relatório para a data selecionada."
+        out['msg'] = "Não há dados para o período selecionado"
     else:
         if not request.json['download']:
             df_dict = stats.timebar_enumerate(mes,

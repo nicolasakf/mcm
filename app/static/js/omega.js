@@ -712,6 +712,7 @@ var omega = (function(){
                             $("#alert").hide(0);
                             $("#report-images").show();
                             for (let key in mesData) {
+                                debugger;
                                 try{
                                     document.getElementById(key).src = "../.." + mesData[key];
                                 }
