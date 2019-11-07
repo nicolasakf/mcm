@@ -13,6 +13,7 @@ import os, shutil
 from app.core.utils import h
 
 ROOTPATH = '/home/ubuntu/romi_legacy_new/app/static/res/figures'
+# ROOTPATH = 'app/static/res/figures'
 
 
 def _format_df(df):
@@ -90,7 +91,8 @@ def export_figures(figs):
     for ft, f in figs.items():
         filepath = ROOTPATH + '/' + str(dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
         f.savefig(filepath, bbox_inches='tight')
-        out[ft] = filepath[33:]
+        out[ft] = filepath[32:]
+        # out[ft] = filepath[3:]
 
     return out
 
