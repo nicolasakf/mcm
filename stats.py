@@ -50,9 +50,10 @@ def timebar_enumerate(df, tag_list):
 # def compound(df_dict):
 #     out = {k: pd.Series(index=v.columns) for k, v in df_dict}
 #     for tag, df in df_dict.items():
-#
+#         pass
 #
 #     return out
+
 
 def format_xaxis(value, _):
     days = value / 60 / 60 / 24
@@ -93,8 +94,9 @@ def export_figures(figs):
 
     return out
 
-# df = pd.read_excel('/Users/NicolasFonteyne/GoogleDrive/Insper/10º semestre/2019-10-31 04_19_07.708884 016-020207-456.xlsx')
+# df = pd.read_csv('/Users/NicolasFonteyne/Downloads/2019-11-06 02_36_25.589055 7654321.csv')
 # res = timebar_enumerate(df, ['alm_list_msg1', 'alm_list_msg2', 'alm_list_msg3'])
+# res2 = compound(res)
 # res = timebar_enumerate(df, ['pmc_alm1', 'pmc_alm2', 'pmc_alm3', 'pmc_alm4'])
 # res = timebar_enumerate(df, ['auto_stat', 'edit_stat', 'emg_stat'])
 # plots = plot_timeline(res)
