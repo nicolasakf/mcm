@@ -90,7 +90,7 @@ def export_figures(figs):
     for ft, f in figs.items():
         filepath = ROOTPATH + '/' + str(dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
         f.savefig(filepath, bbox_inches='tight')
-        out[ft] = filepath[5:]
+        out[ft] = filepath
 
     return out
 
