@@ -17,7 +17,7 @@ def select_mes_period(machine_id, start, end, tags=None, **kwargs):
     if tags is None:
         tags = ['alm_list_msg1', 'alm_list_msg2', 'alm_list_msg3', 'alm_stat', 'alm_type1', 'alm_type2', 'alm_type3',
                 'auto_stat', 'edit_stat', 'emg_stat', 'motion_stat', 'run_stat', 'pmc_alm1', 'pmc_alm2', 'pmc_alm3',
-                'pmc_alm4', 'prgname', 'name', 'date']
+                'pmc_alm4', 'prgname', 'timer_cut', 'timer_on', 'timer_op', 'timer_run', 'name', 'date']
     _query = """
         select {} from insper.MES
         where MES.machine_id='{}'

@@ -10,10 +10,10 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import os, shutil
-from app.core.utils import h
+from app.core.utils import h, dhm
 
-ROOTPATH = '/home/ubuntu/romi_legacy_new/app/static/res/figures'
-# ROOTPATH = 'app/static/res/figures'
+# ROOTPATH = '/home/ubuntu/romi_legacy_new/app/static/res/figures'
+ROOTPATH = 'app/static/res/figures'
 
 
 def _format_df(df):
@@ -48,12 +48,49 @@ def timebar_enumerate(df, tag_list):
     return out
 
 
-# def compound(df_dict):
-#     out = {k: pd.Series(index=v.columns) for k, v in df_dict}
-#     for tag, df in df_dict.items():
-#         pass
-#
-#     return out
+def compound(df_dict):
+    out = {}
+    for tag, df in df_dict.items():
+        out[tag] = df.sum()
+    return out
+
+
+def format_val(value, series):
+    pct = value / series.sum()
+    days = value / 60 / 60 / 24
+    _dhm = dhm(dt.timedelta(days))
+    return '{}\n{:.2%}'.format(_dhm, pct)
+
+
+def plot_compound(s_dict):
+    out = {}
+    for tag, s in s_dict.items():
+        fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
+
+        data = s.values
+        strs = list(s.apply(lambda val: format_val(val, s)))
+
+        wedges, texts = ax.pie(data, wedgeprops=dict(width=0.5), startangle=-40)
+
+        bbox_props = dict(boxstyle="square,pad=0.3", fc="w", ec="k", lw=0.72)
+        kw = dict(arrowprops=dict(arrowstyle="-"),
+                  bbox=bbox_props, zorder=0, va="center")
+
+        for i, p in enumerate(wedges):
+            ang = (p.theta2 - p.theta1) / 2. + p.theta1
+            y = np.sin(np.deg2rad(ang))
+            x = np.cos(np.deg2rad(ang))
+            horizontalalignment = {-1: "right", 1: "left"}[int(np.sign(x))]
+            connectionstyle = "angle,angleA=0,angleB={}".format(ang)
+            kw["arrowprops"].update({"connectionstyle": connectionstyle})
+            ax.annotate(strs[i], xy=(x, y), xytext=(1.35 * np.sign(x), 1.4 * y),
+                        horizontalalignment=horizontalalignment, **kw)
+        ax.legend(s.index, loc='upper center', bbox_to_anchor=(0.5, -.125), ncol=1)
+        ax.set_title(tag)
+        out[tag+'_comp'] = fig
+        plt.close()
+
+    return out
 
 
 def format_xaxis(value, _):
@@ -65,40 +102,31 @@ def plot_timeline(df_dict):
     out = {}
     for tag, df in df_dict.items():
         fig, ax = plt.subplots()
-        ax.set_title(tag)
-
         df.index = df.index.date
         df.columns = df.columns.str.replace(' ', '')
         df = df.dropna(how='all').dropna(how='all', axis=1)
         df.plot.barh(ax=ax, align='center', stacked=True)
-        ax.set_xlabel('Time Elapsed', fontsize=12)
-        ax.set_ylabel('Date', fontsize=12)
         ax.xaxis.set_major_formatter(plt.FuncFormatter(format_xaxis))
         ax.legend(loc='upper center', bbox_to_anchor=(0.5, -.125), ncol=1)
+        ax.set_title(tag)
         out[tag] = fig
         plt.close()
 
     return out
 
 
-def export_figures(figs):
+def export_figures(figs, clear=True):
     out = {}
-    try:
-        shutil.rmtree(ROOTPATH)
-        os.mkdir(ROOTPATH)
-    except OSError:
-        pass
+    if clear:
+        try:
+            shutil.rmtree(ROOTPATH)
+            os.mkdir(ROOTPATH)
+        except OSError:
+            pass
     for ft, f in figs.items():
         filepath = ROOTPATH + '/' + str(dt.datetime.now()).replace('.', 'd').replace(':', '').replace(' ', '_') + '.png'
         f.savefig(filepath, bbox_inches='tight')
-        out[ft] = filepath[32:]
-        # out[ft] = filepath[3:]
+        # out[ft] = filepath[32:]
+        out[ft] = filepath[3:]
 
     return out
-
-# df = pd.read_csv('/Users/NicolasFonteyne/Downloads/2019-11-06 02_36_25.589055 7654321.csv')
-# res = timebar_enumerate(df, ['alm_list_msg1', 'alm_list_msg2', 'alm_list_msg3'])
-# res2 = compound(res)
-# res = timebar_enumerate(df, ['pmc_alm1', 'pmc_alm2', 'pmc_alm3', 'pmc_alm4'])
-# res = timebar_enumerate(df, ['auto_stat', 'edit_stat', 'emg_stat'])
-# plots = plot_timeline(res)

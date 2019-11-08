@@ -35,7 +35,9 @@ def request_mes_data(machine_id='1'):
                 ['alm_list_msg1', 'alm_list_msg2', 'alm_list_msg3', 'alm_stat', 'alm_type1', 'alm_type2', 'alm_type3',
                  'auto_stat', 'edit_stat', 'emg_stat', 'motion_stat', 'run_stat', 'pmc_alm1', 'pmc_alm2', 'pmc_alm3',
                  'pmc_alm4', 'prgname'])
-            out.update(stats.export_figures(stats.plot_timeline(df_dict)))
+            comp = stats.compound(df_dict)
+            out.update(stats.export_figures(stats.plot_compound(comp)))
+            out.update(stats.export_figures(stats.plot_timeline(df_dict), clear=False))
             out['ret_code'] = 0
         else:
             out['ret_code'] = 1
@@ -50,8 +52,15 @@ def download_mes(machine_id='1'):
     while (start is None) or (end is None) or (mid is None):
         pass
     mes = db.select_mes_period(machine_dict[machine_id], start, end)
+    if not mes.empty:
+        name = mes['name'][0]
+        mes.drop('name', axis=1, inplace=True)
+        for alm in ['pmc_alm1', 'pmc_alm2', 'pmc_alm3', 'pmc_alm4']:
+            mes[alm] = mes[alm].str.split(' -', expand=True)[0]
+    else:
+        name = machine_dict[machine_id]
 
-    filename = '{} {}.csv'.format(dt.datetime.now(), machine_dict[machine_id])
+    filename = '{} {}.csv'.format(dt.datetime.now(), name)
     path = app.root_path + '/static/res/out/'
     mes.to_csv(path + filename, index=False)
     start = None; end = None; mid = None

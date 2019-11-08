@@ -781,6 +781,7 @@ var omega = (function(){
         }
 
         myMES.loadReport = function(download){
+            $("#alert").hide(0);
             $("#loader").show();
             $("#report-images").hide();
 
