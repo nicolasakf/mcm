@@ -21,7 +21,7 @@ def select_mes_period(machine_id, start, end, tags=None, **kwargs):
     _query = """
         select {} from insper.MES
         where MES.machine_id='{}'
-        and date >= '{}' and date <= '{}'
+        and date(date) >= '{}' and date(date) <= '{}'
         order by date asc
     """.format(', '.join(tags), machine_id, start, end)
     out = select(_query, **kwargs)
