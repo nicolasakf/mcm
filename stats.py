@@ -55,6 +55,33 @@ def compound(df_dict):
     return out
 
 
+def prep_auto(df_dict):
+    auto_stat = df_dict['auto_stat']
+    prep = auto_stat.drop('MEMory', axis=1).sum().sum()
+    auto = auto_stat.sum()['MEMory']
+    s = pd.Series([prep, auto], index=['PREP', 'AUTO'])
+    out = {'Preparation Time / Automatic Time': s}
+    return out
+
+
+def avail(df):
+    _avail = df[['alm_stat', 'emg_stat', 'date']].copy()
+    _avail['avail_stat'] = 'NOT AVAILABLE'
+    _avail['avail_stat'] = _avail['avail_stat'].mask(
+        ((_avail.alm_stat == '****') & (_avail.emg_stat == 'Not emergency')),
+        'AVAILABLE')
+    availability = timebar_enumerate(_avail, ['avail_stat'])
+    out = compound(availability)
+    return out
+
+
+def time_cut(df):
+    cut = df[['timer_op', 'timer_cut']]
+    cut = cut.iloc[-1]
+    out = {'Cutting Time / Operating Time': cut}
+    return out
+
+
 def format_val(value, series):
     pct = value / series.sum()
     days = value / 60 / 60 / 24
@@ -86,8 +113,10 @@ def plot_compound(s_dict):
             ax.annotate(strs[i], xy=(x, y), xytext=(1.35 * np.sign(x), 1.4 * y),
                         horizontalalignment=horizontalalignment, **kw)
         ax.legend(s.index, loc='upper center', bbox_to_anchor=(0.5, -.125), ncol=1)
-        ax.set_title(tag)
-        out[tag+'_comp'] = fig
+        ax.text(0.5, 1.2, tag,
+                 horizontalalignment='center',
+                 transform=ax.transAxes)
+        out[tag + '_comp'] = fig
         plt.close()
 
     return out

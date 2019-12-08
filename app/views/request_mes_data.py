@@ -35,8 +35,14 @@ def request_mes_data(machine_id='1'):
                 ['alm_list_msg1', 'alm_list_msg2', 'alm_list_msg3', 'alm_stat', 'alm_type1', 'alm_type2', 'alm_type3',
                  'auto_stat', 'edit_stat', 'emg_stat', 'motion_stat', 'run_stat', 'pmc_alm1', 'pmc_alm2', 'pmc_alm3',
                  'pmc_alm4', 'prgname'])
+            prep_auto = stats.prep_auto(df_dict)
+            avail = stats.avail(mes)
+            time_cut = stats.time_cut(mes)
             comp = stats.compound(df_dict)
-            out.update(stats.export_figures(stats.plot_compound(comp)))
+            out.update(stats.export_figures(stats.plot_compound(prep_auto)))
+            out.update(stats.export_figures(stats.plot_compound(avail), clear=False))
+            out.update(stats.export_figures(stats.plot_compound(time_cut), clear=False))
+            out.update(stats.export_figures(stats.plot_compound(comp), clear=False))
             out.update(stats.export_figures(stats.plot_timeline(df_dict), clear=False))
             out['ret_code'] = 0
         else:
