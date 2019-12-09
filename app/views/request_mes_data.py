@@ -41,7 +41,7 @@ def request_mes_data(machine_id='1'):
             comp = stats.compound(df_dict)
             out.update(stats.export_figures(stats.plot_compound(prep_auto)))
             out.update(stats.export_figures(stats.plot_compound(avail), clear=False))
-            out.update(stats.export_figures(stats.plot_compound(time_cut), clear=False))
+            out.update(stats.export_figures(stats.plot_compound(time_cut, only_pct=True), clear=False))
             out.update(stats.export_figures(stats.plot_compound(comp), clear=False))
             out.update(stats.export_figures(stats.plot_timeline(df_dict), clear=False))
             out['ret_code'] = 0

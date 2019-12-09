@@ -77,25 +77,25 @@ def avail(df):
 
 def time_cut(df):
     cut = df[['timer_op', 'timer_cut']]
-    cut = cut.iloc[-1]
+    cut = cut.iloc[-1] - cut.iloc[0]
     out = {'Cutting Time / Operating Time': cut}
     return out
 
 
-def format_val(value, series):
+def format_val(value, series, only_pct):
     pct = value / series.sum()
     days = value / 60 / 60 / 24
     _dhm = dhm(dt.timedelta(days))
-    return '{}\n{:.2%}'.format(_dhm, pct)
+    return '{}\n{:.2%}'.format(_dhm, pct) if not only_pct else '{:.2%}'.format(pct)
 
 
-def plot_compound(s_dict):
+def plot_compound(s_dict, only_pct=False):
     out = {}
     for tag, s in s_dict.items():
         fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
 
         data = s.values
-        strs = list(s.apply(lambda val: format_val(val, s)))
+        strs = list(s.apply(lambda val: format_val(val, s, only_pct)))
 
         wedges, texts = ax.pie(data, wedgeprops=dict(width=0.5), startangle=-40)
 
