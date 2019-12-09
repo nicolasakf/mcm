@@ -89,13 +89,13 @@ def format_val(value, series, val=None):
     return '{}\n{:.2%}'.format(_dhm, pct)
 
 
-def plot_compound(s_dict, value=None, only_pct=False):
+def plot_compound(s_dict, value=None):
     out = {}
     for tag, s in s_dict.items():
         fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
 
         data = s.values
-        strs = list(s.apply(lambda val: format_val(val, s, value, only_pct)))
+        strs = list(s.apply(lambda val: format_val(val, s, value)))
 
         wedges, texts = ax.pie(data, wedgeprops=dict(width=0.5), startangle=-40)
 
