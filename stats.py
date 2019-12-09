@@ -82,20 +82,20 @@ def time_cut(df):
     return out
 
 
-def format_val(value, series, only_pct):
+def format_val(value, series, val=None, only_pct=False):
     pct = value / series.sum()
-    days = value / 60 / 60 / 24
+    days = value / 60 / 60 / 24 if val is None else val * pct / 60 / 60 / 24
     _dhm = dhm(dt.timedelta(days))
     return '{}\n{:.2%}'.format(_dhm, pct) if not only_pct else '{:.2%}'.format(pct)
 
 
-def plot_compound(s_dict, only_pct=False):
+def plot_compound(s_dict, value=None, only_pct=False):
     out = {}
     for tag, s in s_dict.items():
         fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
 
         data = s.values
-        strs = list(s.apply(lambda val: format_val(val, s, only_pct)))
+        strs = list(s.apply(lambda val: format_val(val, s, value, only_pct)))
 
         wedges, texts = ax.pie(data, wedgeprops=dict(width=0.5), startangle=-40)
 
