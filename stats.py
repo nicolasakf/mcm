@@ -82,11 +82,11 @@ def time_cut(df):
     return out
 
 
-def format_val(value, series, val=None, only_pct=False):
+def format_val(value, series, val=None):
     pct = value / series.sum()
     days = value / 60 / 60 / 24 if val is None else val * pct / 60 / 60 / 24
     _dhm = dhm(dt.timedelta(days))
-    return '{}\n{:.2%}'.format(_dhm, pct) if not only_pct else '{:.2%}'.format(pct)
+    return '{}\n{:.2%}'.format(_dhm, pct)
 
 
 def plot_compound(s_dict, value=None, only_pct=False):

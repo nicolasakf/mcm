@@ -45,8 +45,7 @@ def request_mes_data(machine_id='1'):
             out.update(stats.export_figures(stats.plot_compound(avail), clear=False))
             out.update(stats.export_figures(
                 stats.plot_compound(time_cut,
-                                    value=prep_auto['Preparation Time / Automatic Time']['AUTO'],
-                                    only_pct=True), clear=False
+                                    value=prep_auto['Preparation Time / Automatic Time']['AUTO']), clear=False
             ))
             out.update(stats.export_figures(stats.plot_compound(comp), clear=False))
             out.update(stats.export_figures(stats.plot_timeline(df_dict), clear=False))
